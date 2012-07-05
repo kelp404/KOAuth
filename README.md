@@ -1,4 +1,4 @@
-#TDOauth 1.0.0 (Kelp mode)
+#TDOAuth 1.0.0 (Kelp mode)
 
 Kelp http://kelp.phate.org/ <br/>
 BSD License<br/>
