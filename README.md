@@ -15,7 +15,7 @@ NSError *error;
 
 NSURLRequest *rq = [TDOAuth URLRequestForPath:EndpointMyTickets
                                 GETParameters:params
-                                         host:_oauth.host        // like "api.yourdomain.com:8080/rest
+                                         host:_oauth.host        // like "api.yourdomain.com:8080/rest"
                                   consumerKey:_oauth.consumerKey
                                consumerSecret:_oauth.consumerSecret   
                                   accessToken:_oauth.accessToken
