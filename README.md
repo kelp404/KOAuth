@@ -1,7 +1,7 @@
 #TDOauth 1.0.0 (Kelp mode)
 
 Kelp http://kelp.phate.org/ <br/>
-BSD License
+BSD License<br/>
 Fork from https://github.com/tweetdeck/TDOAuth Max Howell <max@tweetdeck.com>
 
 
