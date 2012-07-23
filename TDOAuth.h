@@ -61,7 +61,7 @@
  queryParameters in the path as a query string! Path MUST start with a slash!
  Don't percent encode anything!
  */
-+ (NSURLRequest *)URLRequestForPath:(NSString *)unencodedPath_WITHOUT_Query
++ (NSMutableURLRequest *)URLRequestForPath:(NSString *)unencodedPath_WITHOUT_Query
                       GETParameters:(NSDictionary *)unencodedParameters
                                host:(NSString *)host
                         consumerKey:(NSString *)consumerKey
@@ -74,7 +74,7 @@
  shouldn't, since the whole point of OAuth1 is that you *don't* need HTTPS.
  But whatever I guess.
  */
-+ (NSURLRequest *)URLRequestForPath:(NSString *)unencodedPath_WITHOUT_Query
++ (NSMutableURLRequest *)URLRequestForPath:(NSString *)unencodedPath_WITHOUT_Query
                       GETParameters:(NSDictionary *)unencodedParameters
                              scheme:(NSString *)scheme
                                host:(NSString *)host
@@ -89,7 +89,7 @@
  mangle POST requests and break them. We saw this in France for example.
  READ THE DOCUMENTATION FOR GET AS IT APPLIES HERE TOO!
  */
-+ (NSURLRequest *)URLRequestForPath:(NSString *)unencodedPath
++ (NSMutableURLRequest *)URLRequestForPath:(NSString *)unencodedPath
                      POSTParameters:(NSDictionary *)unencodedParameters
                                host:(NSString *)host
                         consumerKey:(NSString *)consumerKey
@@ -100,7 +100,7 @@
 /**
  get request_token
  */
-+ (NSURLRequest *)URLRequestForRequestTokenPath:(NSString *)unencodedPathWithoutQuery
++ (NSMutableURLRequest *)URLRequestForRequestTokenPath:(NSString *)unencodedPathWithoutQuery
 										 scheme:(NSString *)scheme
 										   host:(NSString *)host
 									consumerKey:(NSString *)consumerKey
@@ -109,7 +109,7 @@
 /**
  get access_token
  */
-+ (NSURLRequest *)URLRequestForAccessTokenPath:(NSString *)unencodedPathWithoutQuery
++ (NSMutableURLRequest *)URLRequestForAccessTokenPath:(NSString *)unencodedPathWithoutQuery
 										scheme:(NSString *)scheme
 										  host:(NSString *)host
 								   consumerKey:(NSString *)consumerKey

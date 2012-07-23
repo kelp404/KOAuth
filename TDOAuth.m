@@ -264,7 +264,7 @@ static NSString* timestamp() {
     return queryString;
 }
 
-+ (NSURLRequest *)URLRequestForPath:(NSString *)unencodedPathWithoutQuery
++ (NSMutableURLRequest *)URLRequestForPath:(NSString *)unencodedPathWithoutQuery
                       GETParameters:(NSDictionary *)unencodedParameters
                                host:(NSString *)host
                         consumerKey:(NSString *)consumerKey
@@ -282,7 +282,7 @@ static NSString* timestamp() {
                        tokenSecret:tokenSecret];
 }
 
-+ (NSURLRequest *)URLRequestForPath:(NSString *)unencodedPathWithoutQuery
++ (NSMutableURLRequest *)URLRequestForPath:(NSString *)unencodedPathWithoutQuery
                       GETParameters:(NSDictionary *)unencodedParameters
                              scheme:(NSString *)scheme
                                host:(NSString *)host
@@ -315,11 +315,11 @@ static NSString* timestamp() {
 
 	oauth->method = @"GET";
     oauth->url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@://%@%@", scheme, host, path]];    
-    NSURLRequest *rq=[oauth request];
+    NSMutableURLRequest *rq=[oauth request];
     return rq;
 }
 
-+ (NSURLRequest *)URLRequestForPath:(NSString *)unencodedPath
++ (NSMutableURLRequest *)URLRequestForPath:(NSString *)unencodedPath
                      POSTParameters:(NSDictionary *)unencodedParameters
                                host:(NSString *)host
                         consumerKey:(NSString *)consumerKey
@@ -353,7 +353,7 @@ static NSString* timestamp() {
 /**
  get request_token
  */
-+ (NSURLRequest *)URLRequestForRequestTokenPath:(NSString *)unencodedPathWithoutQuery
++ (NSMutableURLRequest *)URLRequestForRequestTokenPath:(NSString *)unencodedPathWithoutQuery
 										 scheme:(NSString *)scheme
 										   host:(NSString *)host
 									consumerKey:(NSString *)consumerKey
@@ -371,7 +371,7 @@ static NSString* timestamp() {
     
 	oauth->method = @"POST";
     oauth->url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@://%@%@", scheme, host, path]];
-	NSURLRequest *rq = [oauth request];
+	NSMutableURLRequest *rq = [oauth request];
     return rq;
 	
 	
@@ -380,7 +380,7 @@ static NSString* timestamp() {
 /**
  get access_token
  */
-+ (NSURLRequest *)URLRequestForAccessTokenPath:(NSString *)unencodedPathWithoutQuery
++ (NSMutableURLRequest *)URLRequestForAccessTokenPath:(NSString *)unencodedPathWithoutQuery
 										scheme:(NSString *)scheme
 										  host:(NSString *)host
 								   consumerKey:(NSString *)consumerKey
@@ -405,7 +405,7 @@ static NSString* timestamp() {
 	oauth->method = @"POST";
     oauth->url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@://%@%@", scheme, host, path]];
 	
-    NSURLRequest *rq = [oauth request];
+    NSMutableURLRequest *rq = [oauth request];
     return rq;
 	
 	
