@@ -100,6 +100,10 @@
 /**
  get request_token
  */
++ (NSMutableURLRequest *)URLRequestForRequestTokenWithURL:(NSURL *)url
+                                           consumerKey:(NSString *)consumerKey
+                                        consumerSecret:(NSString *)consumerSecret;
+// this is old message
 + (NSMutableURLRequest *)URLRequestForRequestTokenPath:(NSString *)unencodedPathWithoutQuery
 										 scheme:(NSString *)scheme
 										   host:(NSString *)host
@@ -109,6 +113,13 @@
 /**
  get access_token
  */
++ (NSMutableURLRequest *)URLRequestForAccessTokenWithUrl:(NSURL *)url
+                                          consumerKey:(NSString *)consumerKey
+                                       consumerSecret:(NSString *)consumerSecret
+                                         requestToken:(NSString *)requestToken
+                                          tokenSecret:(NSString *)tokenSecret
+                                         oauthVerfier:(NSString *)oauthVerfier;
+// this is old message
 + (NSMutableURLRequest *)URLRequestForAccessTokenPath:(NSString *)unencodedPathWithoutQuery
 										scheme:(NSString *)scheme
 										  host:(NSString *)host

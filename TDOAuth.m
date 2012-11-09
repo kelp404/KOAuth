@@ -353,6 +353,20 @@ static NSString* timestamp() {
 /**
  get request_token
  */
++ (NSMutableURLRequest *)URLRequestForRequestTokenWithURL:(NSURL *)url
+                                              consumerKey:(NSString *)consumerKey
+                                           consumerSecret:(NSString *)consumerSecret
+{
+    if (!url)
+        return nil;
+	
+    TDOAuth *oauth = [[TDOAuth alloc] initRequestTokenWithConsumerKey:consumerKey consumerSecret:consumerSecret];
+    
+	oauth->method = @"POST";
+    oauth->url = url;
+	NSMutableURLRequest *rq = [oauth request];
+    return rq;
+}
 + (NSMutableURLRequest *)URLRequestForRequestTokenPath:(NSString *)unencodedPathWithoutQuery
 										 scheme:(NSString *)scheme
 										   host:(NSString *)host
@@ -362,8 +376,7 @@ static NSString* timestamp() {
 	if (!host || !unencodedPathWithoutQuery)
         return nil;
 	
-    TDOAuth *oauth = [[TDOAuth alloc] initRequestTokenWithConsumerKey:consumerKey
-                                                       consumerSecret:consumerSecret];
+    TDOAuth *oauth = [[TDOAuth alloc] initRequestTokenWithConsumerKey:consumerKey consumerSecret:consumerSecret];
 	
 	NSString *encodedPathWithoutQuery = [unencodedPathWithoutQuery stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	
@@ -373,13 +386,33 @@ static NSString* timestamp() {
     oauth->url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@://%@%@", scheme, host, path]];
 	NSMutableURLRequest *rq = [oauth request];
     return rq;
-	
-	
 }
 
 /**
  get access_token
  */
++ (NSMutableURLRequest *)URLRequestForAccessTokenWithUrl:(NSURL *)url
+                                             consumerKey:(NSString *)consumerKey
+                                          consumerSecret:(NSString *)consumerSecret
+                                            requestToken:(NSString *)requestToken
+                                             tokenSecret:(NSString *)tokenSecret
+                                            oauthVerfier:(NSString *)oauthVerfier
+{
+    if (!url)
+        return nil;
+	
+    TDOAuth *oauth = [[TDOAuth alloc] initAccessTokenWithConsumerKey:consumerKey
+                                                      consumerSecret:consumerSecret
+														requestToken:requestToken
+														 tokenSecret:tokenSecret
+														oauthVerfier:oauthVerfier];
+    
+	oauth->method = @"POST";
+    oauth->url = url;
+	
+    NSMutableURLRequest *rq = [oauth request];
+    return rq;
+}
 + (NSMutableURLRequest *)URLRequestForAccessTokenPath:(NSString *)unencodedPathWithoutQuery
 										scheme:(NSString *)scheme
 										  host:(NSString *)host
@@ -407,8 +440,6 @@ static NSString* timestamp() {
 	
     NSMutableURLRequest *rq = [oauth request];
     return rq;
-	
-	
 }
 
 @end
