@@ -61,7 +61,13 @@
  queryParameters in the path as a query string! Path MUST start with a slash!
  Don't percent encode anything!
  */
-+ (NSMutableURLRequest *)URLRequestForPath:(NSString *)unencodedPath_WITHOUT_Query
++ (NSMutableURLRequest *)URLRequestForUrl:(NSURL *)url
+                             GETParameters:(NSDictionary *)unencodedParameters
+                               consumerKey:(NSString *)consumerKey
+                            consumerSecret:(NSString *)consumerSecret
+                               accessToken:(NSString *)accessToken
+                               tokenSecret:(NSString *)tokenSecret;
++ (NSMutableURLRequest *)URLRequestForPath:(NSString *)unencodedPathWithoutQuery
                       GETParameters:(NSDictionary *)unencodedParameters
                                host:(NSString *)host
                         consumerKey:(NSString *)consumerKey
@@ -74,7 +80,7 @@
  shouldn't, since the whole point of OAuth1 is that you *don't* need HTTPS.
  But whatever I guess.
  */
-+ (NSMutableURLRequest *)URLRequestForPath:(NSString *)unencodedPath_WITHOUT_Query
++ (NSMutableURLRequest *)URLRequestForPath:(NSString *)unencodedPathWithoutQuery
                       GETParameters:(NSDictionary *)unencodedParameters
                              scheme:(NSString *)scheme
                                host:(NSString *)host

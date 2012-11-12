@@ -264,6 +264,34 @@ static NSString* timestamp() {
     return queryString;
 }
 
++ (NSMutableURLRequest *)URLRequestForUrl:(NSURL *)url
+                            GETParameters:(NSDictionary *)unencodedParameters
+                              consumerKey:(NSString *)consumerKey
+                           consumerSecret:(NSString *)consumerSecret
+                              accessToken:(NSString *)accessToken
+                              tokenSecret:(NSString *)tokenSecret
+{
+    if (!url)
+        return nil;
+	
+    TDOAuth *oauth = [[TDOAuth alloc] initWithConsumerKey:consumerKey
+                                           consumerSecret:consumerSecret
+                                              accessToken:accessToken
+                                              tokenSecret:tokenSecret];
+	
+    id parms = [oauth addParameters:unencodedParameters];
+    if (parms) {
+        [parms insertString:@"?" atIndex:0];
+    }
+    else {
+        parms = @"";
+    }
+    
+	oauth->method = @"GET";
+    oauth->url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@%@", url.absoluteString, parms]];
+    NSMutableURLRequest *rq=[oauth request];
+    return rq;
+}
 + (NSMutableURLRequest *)URLRequestForPath:(NSString *)unencodedPathWithoutQuery
                       GETParameters:(NSDictionary *)unencodedParameters
                                host:(NSString *)host
