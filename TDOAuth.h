@@ -95,6 +95,12 @@
  mangle POST requests and break them. We saw this in France for example.
  READ THE DOCUMENTATION FOR GET AS IT APPLIES HERE TOO!
  */
++ (NSMutableURLRequest *)URLRequestForUrl:(NSURL *)url
+                            POSTParameters:(NSDictionary *)unencodedParameters
+                               consumerKey:(NSString *)consumerKey
+                            consumerSecret:(NSString *)consumerSecret
+                               accessToken:(NSString *)accessToken
+                               tokenSecret:(NSString *)tokenSecret;
 + (NSMutableURLRequest *)URLRequestForPath:(NSString *)unencodedPath
                      POSTParameters:(NSDictionary *)unencodedParameters
                                host:(NSString *)host

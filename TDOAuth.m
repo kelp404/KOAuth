@@ -347,6 +347,35 @@ static NSString* timestamp() {
     return rq;
 }
 
++ (NSMutableURLRequest *)URLRequestForUrl:(NSURL *)url
+                           POSTParameters:(NSDictionary *)unencodedParameters
+                              consumerKey:(NSString *)consumerKey
+                           consumerSecret:(NSString *)consumerSecret
+                              accessToken:(NSString *)accessToken
+                              tokenSecret:(NSString *)tokenSecret
+{
+    if (!url) {
+        return nil;
+    }
+    
+    TDOAuth *oauth = [[TDOAuth alloc] initWithConsumerKey:consumerKey
+                                           consumerSecret:consumerSecret
+                                              accessToken:accessToken
+                                              tokenSecret:tokenSecret];
+    oauth->url = url;
+    oauth->method = @"POST";
+	
+    NSMutableString *postbody = [oauth addParameters:unencodedParameters];
+    NSMutableURLRequest *rq = [oauth request];
+	
+    if (postbody.length) {
+        [rq setHTTPBody:[postbody dataUsingEncoding:NSUTF8StringEncoding]];
+        [rq setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [rq setValue:[NSString stringWithFormat:@"%u", rq.HTTPBody.length] forHTTPHeaderField:@"Content-Length"];
+    }
+	
+    return rq;
+}
 + (NSMutableURLRequest *)URLRequestForPath:(NSString *)unencodedPath
                      POSTParameters:(NSDictionary *)unencodedParameters
                                host:(NSString *)host
