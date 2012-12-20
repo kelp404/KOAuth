@@ -239,7 +239,6 @@ static NSString* timestamp() {
     [rq setValue:TDUserAgent forHTTPHeaderField:@"User-Agent"];
 #endif
     [rq setValue:[self authorizationHeader] forHTTPHeaderField:@"Authorization"];
-    [rq setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
     [rq setHTTPMethod:method];
     return rq;
 }
