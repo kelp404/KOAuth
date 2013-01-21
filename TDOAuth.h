@@ -4,7 +4,7 @@
  Fork from https://github.com/tweetdeck/TDOAuth Max Howell <max@tweetdeck.com>
  
  1.0.0      2012-07-05
-    fixed bug: memory leak on iOS Device
+ fixed bug: memory leak on iOS Device
  
  */
 /*
@@ -49,7 +49,7 @@
 @interface TDOAuth : NSObject {
     NSURL *url;
     NSString *signature_secret;
-    NSDictionary *params; // these are pre-percent encoded
+    NSDictionary *_params; // these are pre-percent encoded
     NSDictionary *queryParams; // these are pre-percent encoded
     NSString *method;
 }
@@ -62,32 +62,11 @@
  Don't percent encode anything!
  */
 + (NSMutableURLRequest *)URLRequestForUrl:(NSURL *)url
-                             GETParameters:(NSDictionary *)unencodedParameters
-                               consumerKey:(NSString *)consumerKey
-                            consumerSecret:(NSString *)consumerSecret
-                               accessToken:(NSString *)accessToken
-                               tokenSecret:(NSString *)tokenSecret;
-+ (NSMutableURLRequest *)URLRequestForPath:(NSString *)unencodedPathWithoutQuery
-                      GETParameters:(NSDictionary *)unencodedParameters
-                               host:(NSString *)host
-                        consumerKey:(NSString *)consumerKey
-                     consumerSecret:(NSString *)consumerSecret
-                        accessToken:(NSString *)accessToken
-                        tokenSecret:(NSString *)tokenSecret;
-
-/**
- Sometimes the service in question insists on HTTPS for everything. They
- shouldn't, since the whole point of OAuth1 is that you *don't* need HTTPS.
- But whatever I guess.
- */
-+ (NSMutableURLRequest *)URLRequestForPath:(NSString *)unencodedPathWithoutQuery
-                      GETParameters:(NSDictionary *)unencodedParameters
-                             scheme:(NSString *)scheme
-                               host:(NSString *)host
-                        consumerKey:(NSString *)consumerKey
-                     consumerSecret:(NSString *)consumerSecret
-                        accessToken:(NSString *)accessToken
-                        tokenSecret:(NSString *)tokenSecret;
+                            GETParameters:(NSDictionary *)unencodedParameters
+                              consumerKey:(NSString *)consumerKey
+                           consumerSecret:(NSString *)consumerSecret
+                              accessToken:(NSString *)accessToken
+                              tokenSecret:(NSString *)tokenSecret;
 
 /**
  We always POST with HTTPS. This is because at least half the time the user's
@@ -96,100 +75,31 @@
  READ THE DOCUMENTATION FOR GET AS IT APPLIES HERE TOO!
  */
 + (NSMutableURLRequest *)URLRequestForUrl:(NSURL *)url
-                            POSTParameters:(NSDictionary *)unencodedParameters
-                               consumerKey:(NSString *)consumerKey
-                            consumerSecret:(NSString *)consumerSecret
-                               accessToken:(NSString *)accessToken
-                               tokenSecret:(NSString *)tokenSecret;
-+ (NSMutableURLRequest *)URLRequestForPath:(NSString *)unencodedPath
-                     POSTParameters:(NSDictionary *)unencodedParameters
-                               host:(NSString *)host
-                        consumerKey:(NSString *)consumerKey
-                     consumerSecret:(NSString *)consumerSecret
-                        accessToken:(NSString *)accessToken
-                        tokenSecret:(NSString *)tokenSecret;
+                           POSTParameters:(NSDictionary *)unencodedParameters
+                              consumerKey:(NSString *)consumerKey
+                           consumerSecret:(NSString *)consumerSecret
+                              accessToken:(NSString *)accessToken
+                              tokenSecret:(NSString *)tokenSecret;
 
 /**
  get request_token
  */
-+ (NSMutableURLRequest *)URLRequestForRequestTokenWithURL:(NSURL *)url
-                                           consumerKey:(NSString *)consumerKey
-                                        consumerSecret:(NSString *)consumerSecret;
-// this is old message
-+ (NSMutableURLRequest *)URLRequestForRequestTokenPath:(NSString *)unencodedPathWithoutQuery
-										 scheme:(NSString *)scheme
-										   host:(NSString *)host
-									consumerKey:(NSString *)consumerKey
-								 consumerSecret:(NSString *)consumerSecret;
++ (NSMutableURLRequest *)URLRequestForRequestTokenWithUrl:(NSURL *)url
+                                              consumerKey:(NSString *)consumerKey
+                                           consumerSecret:(NSString *)consumerSecret;
 
 /**
  get access_token
  */
 + (NSMutableURLRequest *)URLRequestForAccessTokenWithUrl:(NSURL *)url
-                                          consumerKey:(NSString *)consumerKey
-                                       consumerSecret:(NSString *)consumerSecret
-                                         requestToken:(NSString *)requestToken
-                                          tokenSecret:(NSString *)tokenSecret
-                                         oauthVerfier:(NSString *)oauthVerfier;
-// this is old message
-+ (NSMutableURLRequest *)URLRequestForAccessTokenPath:(NSString *)unencodedPathWithoutQuery
-										scheme:(NSString *)scheme
-										  host:(NSString *)host
-								   consumerKey:(NSString *)consumerKey
-								consumerSecret:(NSString *)consumerSecret
-								  requestToken:(NSString *)requestToken
-								   tokenSecret:(NSString *)tokenSecret
-								  oauthVerfier:(NSString *)oauthVerfier;
+                                             consumerKey:(NSString *)consumerKey
+                                          consumerSecret:(NSString *)consumerSecret
+                                            requestToken:(NSString *)requestToken
+                                             tokenSecret:(NSString *)tokenSecret
+                                            oauthVerfier:(NSString *)oauthVerfier;
 
 
 @end
-
-
-/**
- XAuth example (because you may otherwise be scratching your head):
- 
- NSURLRequest *xauth = [TDOAuth URLRequestForPath:@"/oauth/access_token"
- POSTParameters:[NSDictionary dictionaryWithObjectsAndKeys:
- username, @"x_auth_username",
- password, @"x_auth_password",
- @"client_auth", @"x_auth_mode",
- nil]
- host:@"api.twitter.com"
- consumerKey:CONSUMER_KEY
- consumerSecret:CONSUMER_SECRET
- accessToken:nil
- tokenSecret:nil];
- 
- OAuth Echo example (we have found that some consumers require HTTPS for the
- echo, so to be safe we always do it):
- 
- NSURLRequest *echo = [TDOAuth URLRequestForPath:@"/1/account/verify_credentials.json"
- GETParameters:nil
- scheme:@"https"
- host:@"api.twitter.com"
- consumerKey:CONSUMER_KEY
- consumerSecret:CONSUMER_SECRET
- accessToken:accessToken
- tokenSecret:tokenSecret];
- NSMutableURLRequest *rq = [NSMutableURLRequest new];
- [rq setValue:[[echo URL] absoluteString] forHTTPHeaderField:@"X-Auth-Service-Provider"];
- [rq setValue:[echo valueForHTTPHeaderField:@"Authorization"] forHTTPHeaderField:@"X-Verify-Credentials-Authorization"];
- // Now consume rq with an NSURLConnection
- [rq release];
- */
-
-
-/**
- Suggested usage would be to make some categories for this class that
- automatically adds both secrets, both tokens and host information. This
- makes usage less cumbersome. Eg:
- 
- [TwitterOAuth GET:@"/1/statuses/home_timeline.json"];
- [TwitterOAuth GET:@"/1/statuses/home_timeline.json" queryParameters:dictionary];
- 
- At TweetDeck we have TDAccount classes that represent separate user logins
- for different services when instantiated.
- */
 
 
 /**

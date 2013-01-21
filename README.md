@@ -13,7 +13,7 @@ A BSD-licensed single-header-single-source OAuth1 implementation.
 NSDictionary *params = [NSDictionary new];
 NSError *error;
 
-NSURLRequest *rq = [TDOAuth URLRequestForPath:EndpointMyTickets
+NSURLRequest *rq = [TDOAuth URLRequestForUrl:EndpointMyTickets
                                 GETParameters:params
                                          host:_oauth.host        // like "api.yourdomain.com:8080/rest"
                                   consumerKey:_oauth.consumerKey
