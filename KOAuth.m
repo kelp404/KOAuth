@@ -244,9 +244,9 @@ KOAUTH_BURST_LINK NSString *signatureBase(NSMutableDictionary *params, NSMutable
 	
     KOAuth *oauth = [[KOAuth alloc] initForAccessTokenWithConsumerKey:consumerKey
                                                       consumerSecret:consumerSecret
-														requestToken:requestToken
-														 tokenSecret:tokenSecret
-														oauthVerfier:oauthVerfier];
+                                                         requestToken:requestToken
+                                                          tokenSecret:tokenSecret
+                                                         oauthVerfier:oauthVerfier];
 	
     NSMutableURLRequest *rq = [oauth getRequestWittURL:url andMethod:@"POST"];
     return rq;
