@@ -1,25 +1,28 @@
-#TDOAuth 1.0.0 (Kelp mode)
+#KOAuth
 
-Kelp http://kelp.phate.org/ <br/>
-BSD License<br/>
-Fork from https://github.com/tweetdeck/TDOAuth Max Howell <max@tweetdeck.com>
+Kelp http://kelp.phate.org/  
+[MIT License][mit]
+[MIT]: http://www.opensource.org/licenses/mit-license.php
 
 
-A BSD-licensed single-header-single-source OAuth1 implementation.
-
-**example:**
+##example
 ```objective-c
-// argument of request
-NSDictionary *params = [NSDictionary new];
-NSError *error;
+NSURL *url = [NSURL URLWithString:@"http://demo.uservoice.com/api/v1/articles.json"];
+NSMutableURLRequest *request = [KOAuth URLRequestForUrl:url
+                                          GETParameters:nil
+                                            consumerKey:@"pZJocTBPbg5FN4bAwczDLQ"
+                                         consumerSecret:@"Q7UKcxRYLlSJN4CxegUYI6t0uprdsSAGthRIDvYmI"
+                                            accessToken:nil tokenSecret:nil];
+NSLog(@"Headers:\n%@", request.allHTTPHeaderFields);
 
-NSURLRequest *rq = [TDOAuth URLRequestForUrl:EndpointMyTickets
-                                GETParameters:params
-                                         host:_oauth.host        // like "api.yourdomain.com:8080/rest"
-                                  consumerKey:_oauth.consumerKey
-                               consumerSecret:_oauth.consumerSecret   
-                                  accessToken:_oauth.accessToken
-                                  tokenSecret:_oauth.accessTokenSecret];
-// response
-NSData * data = [NSURLConnection sendSynchronousRequest:rq returningResponse:nil error:&error];
+NSURLResponse *response = nil;
+NSError *error = nil;
+NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+if (error == nil && ((NSHTTPURLResponse *)response).statusCode == 200 && data && data.length > 0) {
+    NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"Response:\n%@", content);
+}
+else {
+    STFail(@"UserVoice web service error.");
+}
 ```
