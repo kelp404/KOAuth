@@ -3,7 +3,7 @@
 //  KOAuthTests
 //
 //  Created by Kelp on 2013/01/24.
-//  Copyright (c) 2013年 Accuvally Inc. All rights reserved.
+//  Copyright (c) 2013 Accuvally Inc. All rights reserved.
 //
 
 #import "KOAuthTests.h"
@@ -39,7 +39,7 @@
     NSURLResponse *response = nil;
     NSError *error = nil;
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    if (error == nil && ((NSHTTPURLResponse *)response).statusCode == 200 && data && data.length > 0) {
+    if (error == nil && ((NSHTTPURLResponse *)response).statusCode == 200 && data.length > 0) {
         NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         if ([content rangeOfString:@"{\"response_data\":{\"page\":1,"].location == NSNotFound) {
             STFail(@"UserVoice list articles failed.");
