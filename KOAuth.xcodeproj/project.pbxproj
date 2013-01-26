@@ -212,7 +212,7 @@
 			attributes = {
 				CLASSPREFIX = KOAuthDemo;
 				LastUpgradeCheck = 0450;
-				ORGANIZATIONNAME = "Accuvally Inc.";
+				ORGANIZATIONNAME = "";
 			};
 			buildConfigurationList = 21C4DFE816B10A7D002D99AF /* Build configuration list for PBXProject "KOAuth" */;
 			compatibilityVersion = "Xcode 3.2";
