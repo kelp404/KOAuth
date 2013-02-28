@@ -31,41 +31,50 @@
 #pragma mark - Init
 - (id)initWithConsumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessToken:(NSString *)accessToken tokenSecret:(NSString *)tokenSecret
 {
-    _params = @{@"oauth_consumer_key" : consumerKey,
+    self = [super init];
+    if (self) {
+        _params = @{@"oauth_consumer_key" : consumerKey,
                     @"oauth_nonce" : nonce(),
                     @"oauth_timestamp" : timestamp(),
                     @"oauth_version" : @"1.0",
                     @"oauth_signature_method" : @"HMAC-SHA1",
                     @"oauth_token" : accessToken ? : @""
-    };
-    _signature_secret = [NSString stringWithFormat:@"%@&%@", consumerSecret, tokenSecret ? : @"" ];
+                    };
+        _signatureSecret = [NSString stringWithFormat:@"%@&%@", consumerSecret, tokenSecret ? : @"" ];
+    }
     return self;
 }
 
 - (id)initForRequestTokenWithConsumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret
 {
-    _params = @{@"oauth_consumer_key" : consumerKey,
+    self = [super init];
+    if (self) {
+        _params = @{@"oauth_consumer_key" : consumerKey,
                     @"oauth_nonce" : nonce(),
                     @"oauth_timestamp" : timestamp(),
                     @"oauth_version" : @"1.0",
                     @"oauth_signature_method" : @"HMAC-SHA1",
                     @"oauth_callback" : @"oob"
-    };
-    _signature_secret = [NSString stringWithFormat:@"%@&%@", consumerSecret, @"" ];
+                    };
+        _signatureSecret = [NSString stringWithFormat:@"%@&%@", consumerSecret, @"" ];
+    }
     return self;
 }
 
 - (id)initForAccessTokenWithConsumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret requestToken:(NSString *)requestToken tokenSecret:(NSString *)tokenSecret oauthVerfier:(NSString *)oauthVerfier
 {
-    _params = @{@"oauth_consumer_key" : consumerKey,
+    self = [super init];
+    if (self) {
+        _params = @{@"oauth_consumer_key" : consumerKey,
                     @"oauth_nonce" : nonce(),
                     @"oauth_timestamp" : timestamp(),
                     @"oauth_version" : @"1.0",
                     @"oauth_signature_method" : @"HMAC-SHA1",
                     @"oauth_token" : requestToken ? : @"",
                     @"oauth_verifier" : oauthVerfier ? : @""
-    };
-    _signature_secret = [NSString stringWithFormat:@"%@&%@", consumerSecret, tokenSecret ? : @""  ];
+                    };
+        _signatureSecret = [NSString stringWithFormat:@"%@&%@", consumerSecret, tokenSecret ? : @""  ];
+    }
     return self;
 }
 
@@ -74,46 +83,34 @@
 #pragma mark HTTP GET
 + (NSMutableURLRequest *)URLRequestForUrl:(NSURL *)url GETParameters:(NSDictionary *)unencodedParameters consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessToken:(NSString *)accessToken tokenSecret:(NSString *)tokenSecret
 {
-    if (!url)
-        return nil;
-	
-    KOAuth *oauth = [[KOAuth alloc] initWithConsumerKey:consumerKey consumerSecret:consumerSecret accessToken:accessToken tokenSecret:tokenSecret];
-	
-    NSMutableString *parms = [oauth getParametersString:unencodedParameters];
-    if (parms.length > 0) {
-        [parms insertString:@"?" atIndex:0];
-    }
-    
-    NSMutableURLRequest *request = [oauth getRequestWittURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", url.absoluteString, parms]] andMethod:@"GET"];
+    KOAuth *oauth = [[KOAuth alloc] initWithConsumerKey:consumerKey
+                                         consumerSecret:consumerSecret
+                                            accessToken:accessToken
+                                            tokenSecret:tokenSecret];
+    NSMutableURLRequest *request = [oauth getRequestWittURL:url
+                                                  andMethod:@"GET"
+                                              andParameters:unencodedParameters];
     return request;
 }
 #pragma mark HTTP POST
 + (NSMutableURLRequest *)URLRequestForUrl:(NSURL *)url POSTParameters:(NSDictionary *)unencodedParameters consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessToken:(NSString *)accessToken tokenSecret:(NSString *)tokenSecret
 {
-    if (!url) {
-        return nil;
-    }
-    
     KOAuth *oauth = [[KOAuth alloc] initWithConsumerKey:consumerKey
                                            consumerSecret:consumerSecret
                                               accessToken:accessToken
                                               tokenSecret:tokenSecret];
-    NSMutableString *postbody = [oauth getParametersString:unencodedParameters];
-    NSMutableURLRequest *request = [oauth getRequestWittURL:url andMethod:@"POST"];
+    NSMutableURLRequest *request = [oauth getRequestWittURL:url
+                                                  andMethod:@"POST"
+                                              andParameters:unencodedParameters];
 	
-    if (postbody.length) {
-        [request setHTTPBody:[postbody dataUsingEncoding:NSUTF8StringEncoding]];
-        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    }
+    [request setHTTPBody:[oauth getUrlEncodedRequestBody]];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
 	
     return request;
 }
 #pragma mark request for request_token
 + (NSMutableURLRequest *)URLRequestForRequestTokenWithUrl:(NSURL *)url consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret
 {
-    if (!url)
-        return nil;
-	
     KOAuth *oauth = [[KOAuth alloc] initForRequestTokenWithConsumerKey:consumerKey consumerSecret:consumerSecret];
     
 	NSMutableURLRequest *rq = [oauth getRequestWittURL:url andMethod:@"POST"];
@@ -122,9 +119,6 @@
 #pragma mark request for access_token
 + (NSMutableURLRequest *)URLRequestForAccessTokenWithUrl:(NSURL *)url consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret requestToken:(NSString *)requestToken tokenSecret:(NSString *)tokenSecret oauthVerfier:(NSString *)oauthVerfier
 {
-    if (!url)
-        return nil;
-	
     KOAuth *oauth = [[KOAuth alloc] initForAccessTokenWithConsumerKey:consumerKey
                                                       consumerSecret:consumerSecret
                                                          requestToken:requestToken
@@ -138,80 +132,97 @@
 
 #pragma mark - Private ←↖↑↗→↘↓↙←↖↑↗→↘↓↙←↖↑↗→↘↓↙←↖↑↗→↘↓↙←↖↑↗→↘↓↙←↖↑↗→↘↓↙
 #pragma mark - Generate Request
+/**
+ Generate request with oauth.
+ @param url: request url
+ @param method: http method
+ @return: NSMutableURLRequest
+ */
 - (NSMutableURLRequest *)getRequestWittURL:(NSURL *)url andMethod:(NSString *)method
 {
-    //TODO timeout interval depends on connectivity status
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [request setValue:[self getAuthorization:_params url:url method:method] forHTTPHeaderField:@"Authorization"];
+    [request setValue:getAuthorization(url, method, _signatureSecret, _params, nil) forHTTPHeaderField:@"Authorization"];
     [request setHTTPMethod:method];
     return request;
 }
-
-#pragma mark add parameters and get encoded string
-- (NSMutableString *)getParametersString:(NSDictionary *)unencodedParameters
+/**
+ Generate request with oauth.
+ @param url: request url
+ @param method: http method
+ @param parameters: query string or form data
+ @return: NSMutableURLRequest
+ */
+- (NSMutableURLRequest *)getRequestWittURL:(NSURL *)url andMethod:(NSString *)method andParameters:(NSDictionary *)parameters
 {
-    if (!unencodedParameters.count)
-        return [NSMutableString string];
-	
-    NSMutableString *queryString = [NSMutableString string];
-    NSMutableDictionary *encodedParameters = [NSMutableDictionary dictionaryWithDictionary:_queryParams];
-    for (NSString *key in unencodedParameters.allKeys) {
+    if (parameters)
+        _encodedFormParameters = encodeDictionary(parameters);
+
+    if ([method isEqualToString:@"GET"] && _encodedFormParameters) {
+        NSString *queryString = getParametersString(_encodedFormParameters);
+        if (queryString.length > 0) {
+            url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", url.absoluteString, queryString]];
+        }
+    }
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:getAuthorization(url, method, _signatureSecret, _params, _encodedFormParameters) forHTTPHeaderField:@"Authorization"];
+    [request setHTTPMethod:method];
+    return request;
+}
+/**
+ Get x-www-form-urlencoded form body.
+ @return: NSData
+ */
+- (NSData *)getUrlEncodedRequestBody
+{
+    return [getParametersString(_encodedFormParameters) dataUsingEncoding:NSUTF8StringEncoding];
+}
+
+#pragma mark url encode dictionary
+/**
+ UrlEncode NSDictionary's key and value.
+ */
+KOAUTH_BURST_LINK NSDictionary *encodeDictionary(NSDictionary *source)
+{
+    NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:source.count];
+    
+    for (NSString *key in source.allKeys) {
+        [result setObject:urlEncode([source objectForKey:key]) forKey:urlEncode(key)];
+    }
+    return result;
+}
+#pragma mark add parameters and get encoded string
+/**
+ Convert NSDictionary to x-www-form-urlencoded string.
+ */
+KOAUTH_BURST_LINK NSMutableString * getParametersString(NSDictionary *encodedParameters)
+{
+    NSMutableString *queryString = [NSMutableString new];
+    for (NSString *key in encodedParameters.allKeys) {
         NSString *enkey = urlEncode(key);
-        NSString *envalue = urlEncode([unencodedParameters objectForKey:key]);
-        [encodedParameters setObject:envalue forKey:enkey];
+        NSString *envalue = urlEncode([encodedParameters objectForKey:key]);
         [queryString appendString:enkey];
         [queryString appendString:@"="];
         [queryString appendString:envalue];
         [queryString appendString:@"&"];
     }
     chomp(queryString);
-	
-    _queryParams = encodedParameters;
-	
+    
     return queryString;
 }
 
 
-#pragma mark - Signature
-- (NSString *)signatureWithURL:(NSURL *)url andMethod:(NSString *)method
-{
-    NSData *sigbase = [signatureBase([_params mutableCopy], [_queryParams mutableCopy], method, url) dataUsingEncoding:NSUTF8StringEncoding];
-    NSData *secret = [_signature_secret dataUsingEncoding:NSUTF8StringEncoding];
-	
-    uint8_t digest[20] = {0};
-    CCHmacContext cx;
-    CCHmacInit(&cx, kCCHmacAlgSHA1, secret.bytes, secret.length);
-    CCHmacUpdate(&cx, sigbase.bytes, sigbase.length);
-    CCHmacFinal(&cx, digest);
-    
-    return base64(digest);
-}
-KOAUTH_BURST_LINK NSString *signatureBase(NSMutableDictionary *params, NSMutableDictionary *queryParams, NSString *method, NSURL *url)
-{
-    NSMutableString *p3 = [NSMutableString stringWithCapacity:256];
-    [params addEntriesFromDictionary:queryParams];
-    
-    NSArray *keys = [[params allKeys] sortedArrayUsingSelector:@selector(compare:)];
-    for (NSString *key in keys) {
-        [p3 appendString:urlEncode(key)];
-        [p3 appendString:@"="];
-        [p3 appendString:[params objectForKey:key]];
-        [p3 appendString:@"&"];
-    }
-    
-    chomp(p3);
-    
-	NSString *result = [NSString stringWithFormat:@"%@&%@%%3A%%2F%%2F%@%%3A%@%@&%@",
-                        method,
-                        url.scheme.lowercaseString,
-                        urlEncode(url.host.lowercaseString),
-                        url.port,
-                        urlEncode(url.path),
-                        urlEncode(p3)];
-	return result;
-}
-#pragma mark Authorization
-- (NSString *)getAuthorization:(NSDictionary *)params url:(NSURL *)url method:(NSString *)method
+#pragma mark - Authorization
+/**
+ Generate Authorization header.
+ @param url: request url
+ @param method: http method
+ @param secret: _signatureSecret
+ @param params: _params
+ @param encodedQueryParameters: url encoded query parameters
+ @return: Authorization string
+ */
+KOAUTH_BURST_LINK NSString * getAuthorization(NSURL *url, NSString *method, NSString *secret, NSDictionary *params, NSDictionary *encodedQueryParameters)
 {
     NSMutableString *header = [NSMutableString stringWithCapacity:512];
     [header appendString:@"OAuth "];
@@ -222,9 +233,71 @@ KOAUTH_BURST_LINK NSString *signatureBase(NSMutableDictionary *params, NSMutable
         [header appendString:@"\", "];
     }
     [header appendString:@"oauth_signature=\""];
-    [header appendString:urlEncode([self signatureWithURL:url andMethod:method])];
+    [header appendString:urlEncode(signatureWithURL(url, method, secret, params, encodedQueryParameters))];
     [header appendString:@"\""];
     return header;
+}
+/**
+ Generate oauth signature.
+ @param url: request url
+ @param method: http method
+ @param signatureSecret: _signatureSecret
+ @param params: _params
+ @param encodedQueryParameters: url encoded query parameters
+ @return: oauth signature
+ */
+KOAUTH_BURST_LINK NSString *signatureWithURL(NSURL *url, NSString *method, NSString *signatureSecret, NSDictionary *params, NSDictionary *encodedQueryParameters)
+{
+    NSData *sigbase = [signatureBase(params, encodedQueryParameters, method, url) dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *secret = [signatureSecret dataUsingEncoding:NSUTF8StringEncoding];
+	
+    uint8_t digest[20] = {0};
+    CCHmacContext cx;
+    CCHmacInit(&cx, kCCHmacAlgSHA1, secret.bytes, secret.length);
+    CCHmacUpdate(&cx, sigbase.bytes, sigbase.length);
+    CCHmacFinal(&cx, digest);
+    
+    return base64(digest);
+}
+/**
+ Generate sign base string.
+ @param params: _params
+ @param queryParams: _queryParams
+ @param method: http method
+ @param url: request url
+ @return: sign base string
+ */
+KOAUTH_BURST_LINK NSString *signatureBase(NSDictionary *params, NSDictionary *queryParams, NSString *method, NSURL *url)
+{
+    NSMutableString *param = [NSMutableString stringWithCapacity:256];
+    NSMutableDictionary *finalParams = [NSMutableDictionary dictionaryWithDictionary:params];
+    [finalParams addEntriesFromDictionary:queryParams];
+    
+    NSArray *keys = [[finalParams allKeys] sortedArrayUsingSelector:@selector(compare:)];
+    for (NSString *key in keys) {
+        [param appendString:urlEncode(key)];
+        [param appendString:@"="];
+        [param appendString:[finalParams objectForKey:key]];
+        [param appendString:@"&"];
+    }
+    
+    chomp(param);
+    
+	NSMutableString *result = [NSMutableString stringWithCapacity:256];
+    [result appendFormat:@"%@&", method];
+    [result appendString:url.scheme.lowercaseString];
+    [result appendString:@"%3A%2F%2F"];  // @"://"
+    [result appendString:urlEncode(url.host.lowercaseString)];
+    if (url.port) {
+        [result appendFormat:@"%%3A%@", url.port];  // :80
+    }
+    if (url.path) {
+        [result appendString:urlEncode(url.path.lowercaseString)];
+    }
+    if (param.length > 0) {
+        [result appendFormat:@"&%@", urlEncode(param)];
+    }
+	return result;
 }
 
 

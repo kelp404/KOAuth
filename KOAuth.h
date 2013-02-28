@@ -14,9 +14,9 @@
  to interact with in the wild. How ace is that?!
  */
 @interface KOAuth : NSObject {
-    NSString *_signature_secret;
+    NSString *_signatureSecret;
     NSDictionary *_params; // these are pre-percent encoded
-    NSDictionary *_queryParams; // these are pre-percent encoded
+    NSDictionary *_encodedFormParameters;
 }
 
 // *all keys and values of parameters should be NSString*
