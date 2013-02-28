@@ -25,27 +25,75 @@
     [super tearDown];
 }
 
-- (void)testKOAuth
+- (void)testGetRequestToken
 {
-    NSURL *url = [NSURL URLWithString:@"http://demo.uservoice.com/api/v1/articles.json"];
-    NSMutableURLRequest *request = [KOAuth URLRequestForUrl:url
-                                              GETParameters:nil
-                                                consumerKey:@"pZJocTBPbg5FN4bAwczDLQ"
-                                             consumerSecret:@"Q7UKcxRYLlSJN4CxegUYI6t0uprdsSAGthRIDvYmI"
-                                                accessToken:nil tokenSecret:nil];
-    NSLog(@"%@", request.allHTTPHeaderFields);
+    NSURL *url = [NSURL URLWithString:@"http://term.ie/oauth/example/request_token.php"];
+    NSMutableURLRequest *request = [KOAuth URLRequestForRequestTokenWithUrl:url
+                                                                consumerKey:@"key" consumerSecret:@"secret"];
     
     NSURLResponse *response = nil;
     NSError *error = nil;
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     if (error == nil && ((NSHTTPURLResponse *)response).statusCode == 200 && data.length > 0) {
         NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        if ([content rangeOfString:@"{\"response_data\":{\"page\":1,"].location == NSNotFound) {
-            STFail(@"UserVoice list articles failed.");
-        }
+        STAssertEqualObjects(content, @"oauth_token=requestkey&oauth_token_secret=requestsecret", nil);
     }
-    else {
-        STFail(@"UserVoice web service error.");
+}
+
+- (void)testGetAccessToken
+{
+    NSURL *url = [NSURL URLWithString:@"http://term.ie/oauth/example/access_token.php"];
+    NSMutableURLRequest *request = [KOAuth URLRequestForAccessTokenWithUrl:url
+                                                               consumerKey:@"key"
+                                                            consumerSecret:@"secret"
+                                                              requestToken:@"requestkey"
+                                                               tokenSecret:@"requestsecret"
+                                                              oauthVerfier:@""];
+    
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    if (error == nil && ((NSHTTPURLResponse *)response).statusCode == 200 && data.length > 0) {
+        NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        STAssertEqualObjects(content, @"oauth_token=accesskey&oauth_token_secret=accesssecret", nil);
+    }
+}
+
+- (void)testHTTPGet
+{
+    NSURL *url = [NSURL URLWithString:@"http://term.ie/oauth/example/echo_api.php"];
+    NSMutableURLRequest *request = [KOAuth URLRequestForUrl:url
+                                              GETParameters:@{@"name": @"kelp"}
+                                                consumerKey:@"key"
+                                             consumerSecret:@"secret"
+                                                accessToken:@"accesskey"
+                                                tokenSecret:@"accesssecret"];
+    
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    if (error == nil && ((NSHTTPURLResponse *)response).statusCode == 200 && data.length > 0) {
+        NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        STAssertEqualObjects(content, @"name=kelp", nil);
+    }
+}
+
+- (void)testHTTPPost
+{
+    NSURL *url = [NSURL URLWithString:@"http://term.ie/oauth/example/echo_api.php"];
+    NSMutableURLRequest *request = [KOAuth URLRequestForUrl:url
+                                              POSTParameters:@{@"name": @"Kelp"}
+                                                    consumerKey:@"key"
+                                                consumerSecret:@"secret"
+                                                    accessToken:@"accesskey"
+                                                    tokenSecret:@"accesssecret"];
+    
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    if (error == nil && ((NSHTTPURLResponse *)response).statusCode == 200 && data.length > 0) {
+        NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        STAssertEqualObjects(content, @"name=Kelp", nil);
     }
 }
 
