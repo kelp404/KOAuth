@@ -38,6 +38,9 @@
         NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         STAssertEqualObjects(content, @"oauth_token=requestkey&oauth_token_secret=requestsecret", nil);
     }
+    else {
+        STFail(nil);
+    }
 }
 
 - (void)testGetAccessToken
@@ -56,6 +59,9 @@
     if (error == nil && ((NSHTTPURLResponse *)response).statusCode == 200 && data.length > 0) {
         NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         STAssertEqualObjects(content, @"oauth_token=accesskey&oauth_token_secret=accesssecret", nil);
+    }
+    else {
+        STFail(nil);
     }
 }
 
@@ -76,13 +82,16 @@
         NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         STAssertEqualObjects(content, @"name=kelp", nil);
     }
+    else {
+        STFail(nil);
+    }
 }
 
 - (void)testHTTPPost
 {
     NSURL *url = [NSURL URLWithString:@"http://term.ie/oauth/example/echo_api.php"];
     NSMutableURLRequest *request = [KOAuth URLRequestForUrl:url
-                                              POSTParameters:@{@"name": @"Kelp"}
+                                              POSTParameters:@{@"name": @"Kelp", @"group": @"<A>" }
                                                     consumerKey:@"key"
                                                 consumerSecret:@"secret"
                                                     accessToken:@"accesskey"
@@ -93,7 +102,10 @@
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     if (error == nil && ((NSHTTPURLResponse *)response).statusCode == 200 && data.length > 0) {
         NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        STAssertEqualObjects(content, @"name=Kelp", nil);
+        STAssertEqualObjects(content, @"name=Kelp&group=%3CA%3E", nil);
+    }
+    else {
+        STFail(nil);
     }
 }
 
