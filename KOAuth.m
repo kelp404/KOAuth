@@ -199,11 +199,9 @@ KOAUTH_BURST_LINK NSMutableString * getParametersString(NSDictionary *encodedPar
 {
     NSMutableString *queryString = [NSMutableString new];
     for (NSString *key in encodedParameters.allKeys) {
-        NSString *enkey = urlEncode(key);
-        NSString *envalue = urlEncode([encodedParameters objectForKey:key]);
-        [queryString appendString:enkey];
+        [queryString appendString:key];
         [queryString appendString:@"="];
-        [queryString appendString:envalue];
+        [queryString appendString:[encodedParameters objectForKey:key]];
         [queryString appendString:@"&"];
     }
     chomp(queryString);
