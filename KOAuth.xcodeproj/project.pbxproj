@@ -7,52 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		21C4DFF316B10A7D002D99AF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C4DFF216B10A7D002D99AF /* UIKit.framework */; };
-		21C4DFF516B10A7D002D99AF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C4DFF416B10A7D002D99AF /* Foundation.framework */; };
-		21C4DFF716B10A7D002D99AF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C4DFF616B10A7D002D99AF /* CoreGraphics.framework */; };
-		21C4DFFD16B10A7D002D99AF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 21C4DFFB16B10A7D002D99AF /* InfoPlist.strings */; };
-		21C4DFFF16B10A7D002D99AF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C4DFFE16B10A7D002D99AF /* main.m */; };
-		21C4E00316B10A7D002D99AF /* KOAuthDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C4E00216B10A7D002D99AF /* KOAuthDemoAppDelegate.m */; };
-		21C4E00516B10A7D002D99AF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 21C4E00416B10A7D002D99AF /* Default.png */; };
-		21C4E00716B10A7D002D99AF /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21C4E00616B10A7D002D99AF /* Default@2x.png */; };
-		21C4E00916B10A7D002D99AF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21C4E00816B10A7D002D99AF /* Default-568h@2x.png */; };
-		21C4E00C16B10A7D002D99AF /* KOAuthDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C4E00B16B10A7D002D99AF /* KOAuthDemoViewController.m */; };
-		21C4E00F16B10A7D002D99AF /* KOAuthDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21C4E00D16B10A7D002D99AF /* KOAuthDemoViewController.xib */; };
 		21C4E01716B10A7D002D99AF /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C4E01616B10A7D002D99AF /* SenTestingKit.framework */; };
 		21C4E01816B10A7D002D99AF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C4DFF216B10A7D002D99AF /* UIKit.framework */; };
 		21C4E01916B10A7D002D99AF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C4DFF416B10A7D002D99AF /* Foundation.framework */; };
 		21C4E02116B10A7D002D99AF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 21C4E01F16B10A7D002D99AF /* InfoPlist.strings */; };
 		21C4E02416B10A7D002D99AF /* KOAuthTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C4E02316B10A7D002D99AF /* KOAuthTests.m */; };
-		21C4E03316B10ACE002D99AF /* KOAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C4E03216B10ACE002D99AF /* KOAuth.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		21C4E01A16B10A7D002D99AF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 21C4DFE516B10A7D002D99AF /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 21C4DFED16B10A7D002D99AF;
-			remoteInfo = KOAuth;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		21C4DFEE16B10A7D002D99AF /* KOAuth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KOAuth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21C4DFF216B10A7D002D99AF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		21C4DFF416B10A7D002D99AF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		21C4DFF616B10A7D002D99AF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		21C4DFFA16B10A7D002D99AF /* KOAuth-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KOAuth-Info.plist"; sourceTree = "<group>"; };
-		21C4DFFC16B10A7D002D99AF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		21C4DFFE16B10A7D002D99AF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		21C4E00016B10A7D002D99AF /* KOAuth-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KOAuth-Prefix.pch"; sourceTree = "<group>"; };
-		21C4E00116B10A7D002D99AF /* KOAuthDemoAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KOAuthDemoAppDelegate.h; sourceTree = "<group>"; };
-		21C4E00216B10A7D002D99AF /* KOAuthDemoAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KOAuthDemoAppDelegate.m; sourceTree = "<group>"; };
-		21C4E00416B10A7D002D99AF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		21C4E00616B10A7D002D99AF /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		21C4E00816B10A7D002D99AF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		21C4E00A16B10A7D002D99AF /* KOAuthDemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KOAuthDemoViewController.h; sourceTree = "<group>"; };
-		21C4E00B16B10A7D002D99AF /* KOAuthDemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KOAuthDemoViewController.m; sourceTree = "<group>"; };
-		21C4E00E16B10A7D002D99AF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/KOAuthDemoViewController.xib; sourceTree = "<group>"; };
 		21C4E01516B10A7D002D99AF /* KOAuthTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KOAuthTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21C4E01616B10A7D002D99AF /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		21C4E01E16B10A7D002D99AF /* KOAuthTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KOAuthTests-Info.plist"; sourceTree = "<group>"; };
@@ -64,16 +29,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		21C4DFEB16B10A7D002D99AF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				21C4DFF316B10A7D002D99AF /* UIKit.framework in Frameworks */,
-				21C4DFF516B10A7D002D99AF /* Foundation.framework in Frameworks */,
-				21C4DFF716B10A7D002D99AF /* CoreGraphics.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		21C4E01116B10A7D002D99AF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -92,7 +47,6 @@
 			children = (
 				21C4E03116B10ACE002D99AF /* KOAuth.h */,
 				21C4E03216B10ACE002D99AF /* KOAuth.m */,
-				21C4DFF816B10A7D002D99AF /* KOAuth */,
 				21C4E01C16B10A7D002D99AF /* KOAuthTests */,
 				21C4DFF116B10A7D002D99AF /* Frameworks */,
 				21C4DFEF16B10A7D002D99AF /* Products */,
@@ -102,7 +56,6 @@
 		21C4DFEF16B10A7D002D99AF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				21C4DFEE16B10A7D002D99AF /* KOAuth.app */,
 				21C4E01516B10A7D002D99AF /* KOAuthTests.octest */,
 			);
 			name = Products;
@@ -117,33 +70,6 @@
 				21C4E01616B10A7D002D99AF /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		21C4DFF816B10A7D002D99AF /* KOAuth */ = {
-			isa = PBXGroup;
-			children = (
-				21C4E00116B10A7D002D99AF /* KOAuthDemoAppDelegate.h */,
-				21C4E00216B10A7D002D99AF /* KOAuthDemoAppDelegate.m */,
-				21C4E00A16B10A7D002D99AF /* KOAuthDemoViewController.h */,
-				21C4E00B16B10A7D002D99AF /* KOAuthDemoViewController.m */,
-				21C4E00D16B10A7D002D99AF /* KOAuthDemoViewController.xib */,
-				21C4DFF916B10A7D002D99AF /* Supporting Files */,
-			);
-			path = KOAuth;
-			sourceTree = "<group>";
-		};
-		21C4DFF916B10A7D002D99AF /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				21C4DFFA16B10A7D002D99AF /* KOAuth-Info.plist */,
-				21C4DFFB16B10A7D002D99AF /* InfoPlist.strings */,
-				21C4DFFE16B10A7D002D99AF /* main.m */,
-				21C4E00016B10A7D002D99AF /* KOAuth-Prefix.pch */,
-				21C4E00416B10A7D002D99AF /* Default.png */,
-				21C4E00616B10A7D002D99AF /* Default@2x.png */,
-				21C4E00816B10A7D002D99AF /* Default-568h@2x.png */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		21C4E01C16B10A7D002D99AF /* KOAuthTests */ = {
@@ -168,23 +94,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		21C4DFED16B10A7D002D99AF /* KOAuth */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 21C4E02716B10A7D002D99AF /* Build configuration list for PBXNativeTarget "KOAuth" */;
-			buildPhases = (
-				21C4DFEA16B10A7D002D99AF /* Sources */,
-				21C4DFEB16B10A7D002D99AF /* Frameworks */,
-				21C4DFEC16B10A7D002D99AF /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = KOAuth;
-			productName = KOAuth;
-			productReference = 21C4DFEE16B10A7D002D99AF /* KOAuth.app */;
-			productType = "com.apple.product-type.application";
-		};
 		21C4E01416B10A7D002D99AF /* KOAuthTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 21C4E02A16B10A7D002D99AF /* Build configuration list for PBXNativeTarget "KOAuthTests" */;
@@ -197,7 +106,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				21C4E01B16B10A7D002D99AF /* PBXTargetDependency */,
 			);
 			name = KOAuthTests;
 			productName = KOAuthTests;
@@ -226,25 +134,12 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				21C4DFED16B10A7D002D99AF /* KOAuth */,
 				21C4E01416B10A7D002D99AF /* KOAuthTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		21C4DFEC16B10A7D002D99AF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				21C4DFFD16B10A7D002D99AF /* InfoPlist.strings in Resources */,
-				21C4E00516B10A7D002D99AF /* Default.png in Resources */,
-				21C4E00716B10A7D002D99AF /* Default@2x.png in Resources */,
-				21C4E00916B10A7D002D99AF /* Default-568h@2x.png in Resources */,
-				21C4E00F16B10A7D002D99AF /* KOAuthDemoViewController.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		21C4E01216B10A7D002D99AF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -272,17 +167,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		21C4DFEA16B10A7D002D99AF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				21C4DFFF16B10A7D002D99AF /* main.m in Sources */,
-				21C4E00316B10A7D002D99AF /* KOAuthDemoAppDelegate.m in Sources */,
-				21C4E00C16B10A7D002D99AF /* KOAuthDemoViewController.m in Sources */,
-				21C4E03316B10ACE002D99AF /* KOAuth.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		21C4E01016B10A7D002D99AF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -293,31 +177,7 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		21C4E01B16B10A7D002D99AF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 21C4DFED16B10A7D002D99AF /* KOAuth */;
-			targetProxy = 21C4E01A16B10A7D002D99AF /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
-		21C4DFFB16B10A7D002D99AF /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				21C4DFFC16B10A7D002D99AF /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		21C4E00D16B10A7D002D99AF /* KOAuthDemoViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				21C4E00E16B10A7D002D99AF /* en */,
-			);
-			name = KOAuthDemoViewController.xib;
-			sourceTree = "<group>";
-		};
 		21C4E01F16B10A7D002D99AF /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -379,28 +239,6 @@
 			};
 			name = Release;
 		};
-		21C4E02816B10A7D002D99AF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "KOAuth/KOAuth-Prefix.pch";
-				INFOPLIST_FILE = "KOAuth/KOAuth-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		21C4E02916B10A7D002D99AF /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "KOAuth/KOAuth-Prefix.pch";
-				INFOPLIST_FILE = "KOAuth/KOAuth-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
 		21C4E02B16B10A7D002D99AF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -410,7 +248,7 @@
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "KOAuth/KOAuth-Prefix.pch";
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "KOAuthTests/KOAuthTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -427,7 +265,7 @@
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "KOAuth/KOAuth-Prefix.pch";
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "KOAuthTests/KOAuthTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -443,15 +281,6 @@
 			buildConfigurations = (
 				21C4E02516B10A7D002D99AF /* Debug */,
 				21C4E02616B10A7D002D99AF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		21C4E02716B10A7D002D99AF /* Build configuration list for PBXNativeTarget "KOAuth" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				21C4E02816B10A7D002D99AF /* Debug */,
-				21C4E02916B10A7D002D99AF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
