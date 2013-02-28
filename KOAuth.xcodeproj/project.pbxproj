@@ -7,86 +7,137 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		21C4E01716B10A7D002D99AF /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C4E01616B10A7D002D99AF /* SenTestingKit.framework */; };
-		21C4E01816B10A7D002D99AF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C4DFF216B10A7D002D99AF /* UIKit.framework */; };
-		21C4E01916B10A7D002D99AF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C4DFF416B10A7D002D99AF /* Foundation.framework */; };
-		21C4E02116B10A7D002D99AF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 21C4E01F16B10A7D002D99AF /* InfoPlist.strings */; };
-		21C4E02416B10A7D002D99AF /* KOAuthTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C4E02316B10A7D002D99AF /* KOAuthTests.m */; };
+		21B3DD4816DF54DC0070350B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B3DD4716DF54DC0070350B /* Foundation.framework */; };
+		21B3DD5716DF54DC0070350B /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B3DD5616DF54DC0070350B /* SenTestingKit.framework */; };
+		21B3DD5916DF54DC0070350B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B3DD5816DF54DC0070350B /* UIKit.framework */; };
+		21B3DD5A16DF54DC0070350B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B3DD4716DF54DC0070350B /* Foundation.framework */; };
+		21B3DD5D16DF54DC0070350B /* libKOAuth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B3DD4416DF54DC0070350B /* libKOAuth.a */; };
+		21B3DD6316DF54DC0070350B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 21B3DD6116DF54DC0070350B /* InfoPlist.strings */; };
+		21B3DD6616DF54DC0070350B /* KOAuthTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B3DD6516DF54DC0070350B /* KOAuthTests.m */; };
+		21B3DD7116DF553A0070350B /* KOAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B3DD7016DF553A0070350B /* KOAuth.m */; };
+		21B3DD7216DF553A0070350B /* KOAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B3DD7016DF553A0070350B /* KOAuth.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		21B3DD5B16DF54DC0070350B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21B3DD3C16DF54DC0070350B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 21B3DD4316DF54DC0070350B;
+			remoteInfo = KOAuth;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		21B3DD4216DF54DC0070350B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		21C4DFF216B10A7D002D99AF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		21C4DFF416B10A7D002D99AF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		21C4DFF616B10A7D002D99AF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		21C4E01516B10A7D002D99AF /* KOAuthTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KOAuthTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		21C4E01616B10A7D002D99AF /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		21C4E01E16B10A7D002D99AF /* KOAuthTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KOAuthTests-Info.plist"; sourceTree = "<group>"; };
-		21C4E02016B10A7D002D99AF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		21C4E02216B10A7D002D99AF /* KOAuthTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KOAuthTests.h; sourceTree = "<group>"; };
-		21C4E02316B10A7D002D99AF /* KOAuthTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KOAuthTests.m; sourceTree = "<group>"; };
-		21C4E03116B10ACE002D99AF /* KOAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KOAuth.h; sourceTree = "<group>"; };
-		21C4E03216B10ACE002D99AF /* KOAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KOAuth.m; sourceTree = "<group>"; };
+		21B3DD4416DF54DC0070350B /* libKOAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libKOAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		21B3DD4716DF54DC0070350B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		21B3DD5516DF54DC0070350B /* KOAuthTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KOAuthTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		21B3DD5616DF54DC0070350B /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		21B3DD5816DF54DC0070350B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		21B3DD6016DF54DC0070350B /* KOAuthTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KOAuthTests-Info.plist"; sourceTree = "<group>"; };
+		21B3DD6216DF54DC0070350B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		21B3DD6416DF54DC0070350B /* KOAuthTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KOAuthTests.h; sourceTree = "<group>"; };
+		21B3DD6516DF54DC0070350B /* KOAuthTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KOAuthTests.m; sourceTree = "<group>"; };
+		21B3DD6F16DF553A0070350B /* KOAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KOAuth.h; sourceTree = SOURCE_ROOT; };
+		21B3DD7016DF553A0070350B /* KOAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KOAuth.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		21C4E01116B10A7D002D99AF /* Frameworks */ = {
+		21B3DD4116DF54DC0070350B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21C4E01716B10A7D002D99AF /* SenTestingKit.framework in Frameworks */,
-				21C4E01816B10A7D002D99AF /* UIKit.framework in Frameworks */,
-				21C4E01916B10A7D002D99AF /* Foundation.framework in Frameworks */,
+				21B3DD4816DF54DC0070350B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21B3DD5116DF54DC0070350B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21B3DD5716DF54DC0070350B /* SenTestingKit.framework in Frameworks */,
+				21B3DD5916DF54DC0070350B /* UIKit.framework in Frameworks */,
+				21B3DD5A16DF54DC0070350B /* Foundation.framework in Frameworks */,
+				21B3DD5D16DF54DC0070350B /* libKOAuth.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		21C4DFE316B10A7D002D99AF = {
+		21B3DD3B16DF54DC0070350B = {
 			isa = PBXGroup;
 			children = (
-				21C4E03116B10ACE002D99AF /* KOAuth.h */,
-				21C4E03216B10ACE002D99AF /* KOAuth.m */,
-				21C4E01C16B10A7D002D99AF /* KOAuthTests */,
-				21C4DFF116B10A7D002D99AF /* Frameworks */,
-				21C4DFEF16B10A7D002D99AF /* Products */,
+				21B3DD4916DF54DC0070350B /* KOAuth */,
+				21B3DD5E16DF54DC0070350B /* KOAuthTests */,
+				21B3DD4616DF54DC0070350B /* Frameworks */,
+				21B3DD4516DF54DC0070350B /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		21C4DFEF16B10A7D002D99AF /* Products */ = {
+		21B3DD4516DF54DC0070350B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				21C4E01516B10A7D002D99AF /* KOAuthTests.octest */,
+				21B3DD4416DF54DC0070350B /* libKOAuth.a */,
+				21B3DD5516DF54DC0070350B /* KOAuthTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		21C4DFF116B10A7D002D99AF /* Frameworks */ = {
+		21B3DD4616DF54DC0070350B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				21C4DFF216B10A7D002D99AF /* UIKit.framework */,
-				21C4DFF416B10A7D002D99AF /* Foundation.framework */,
-				21C4DFF616B10A7D002D99AF /* CoreGraphics.framework */,
-				21C4E01616B10A7D002D99AF /* SenTestingKit.framework */,
+				21B3DD4716DF54DC0070350B /* Foundation.framework */,
+				21B3DD5616DF54DC0070350B /* SenTestingKit.framework */,
+				21B3DD5816DF54DC0070350B /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		21C4E01C16B10A7D002D99AF /* KOAuthTests */ = {
+		21B3DD4916DF54DC0070350B /* KOAuth */ = {
 			isa = PBXGroup;
 			children = (
-				21C4E02216B10A7D002D99AF /* KOAuthTests.h */,
-				21C4E02316B10A7D002D99AF /* KOAuthTests.m */,
-				21C4E01D16B10A7D002D99AF /* Supporting Files */,
+				21B3DD6F16DF553A0070350B /* KOAuth.h */,
+				21B3DD7016DF553A0070350B /* KOAuth.m */,
+				21B3DD4A16DF54DC0070350B /* Supporting Files */,
+			);
+			path = KOAuth;
+			sourceTree = "<group>";
+		};
+		21B3DD4A16DF54DC0070350B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		21B3DD5E16DF54DC0070350B /* KOAuthTests */ = {
+			isa = PBXGroup;
+			children = (
+				21B3DD6416DF54DC0070350B /* KOAuthTests.h */,
+				21B3DD6516DF54DC0070350B /* KOAuthTests.m */,
+				21B3DD5F16DF54DC0070350B /* Supporting Files */,
 			);
 			path = KOAuthTests;
 			sourceTree = "<group>";
 		};
-		21C4E01D16B10A7D002D99AF /* Supporting Files */ = {
+		21B3DD5F16DF54DC0070350B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				21C4E01E16B10A7D002D99AF /* KOAuthTests-Info.plist */,
-				21C4E01F16B10A7D002D99AF /* InfoPlist.strings */,
+				21B3DD6016DF54DC0070350B /* KOAuthTests-Info.plist */,
+				21B3DD6116DF54DC0070350B /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -94,64 +145,81 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		21C4E01416B10A7D002D99AF /* KOAuthTests */ = {
+		21B3DD4316DF54DC0070350B /* KOAuth */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 21C4E02A16B10A7D002D99AF /* Build configuration list for PBXNativeTarget "KOAuthTests" */;
+			buildConfigurationList = 21B3DD6916DF54DC0070350B /* Build configuration list for PBXNativeTarget "KOAuth" */;
 			buildPhases = (
-				21C4E01016B10A7D002D99AF /* Sources */,
-				21C4E01116B10A7D002D99AF /* Frameworks */,
-				21C4E01216B10A7D002D99AF /* Resources */,
-				21C4E01316B10A7D002D99AF /* ShellScript */,
+				21B3DD4016DF54DC0070350B /* Sources */,
+				21B3DD4116DF54DC0070350B /* Frameworks */,
+				21B3DD4216DF54DC0070350B /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
+			name = KOAuth;
+			productName = KOAuth;
+			productReference = 21B3DD4416DF54DC0070350B /* libKOAuth.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		21B3DD5416DF54DC0070350B /* KOAuthTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21B3DD6C16DF54DC0070350B /* Build configuration list for PBXNativeTarget "KOAuthTests" */;
+			buildPhases = (
+				21B3DD5016DF54DC0070350B /* Sources */,
+				21B3DD5116DF54DC0070350B /* Frameworks */,
+				21B3DD5216DF54DC0070350B /* Resources */,
+				21B3DD5316DF54DC0070350B /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				21B3DD5C16DF54DC0070350B /* PBXTargetDependency */,
+			);
 			name = KOAuthTests;
 			productName = KOAuthTests;
-			productReference = 21C4E01516B10A7D002D99AF /* KOAuthTests.octest */;
+			productReference = 21B3DD5516DF54DC0070350B /* KOAuthTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		21C4DFE516B10A7D002D99AF /* Project object */ = {
+		21B3DD3C16DF54DC0070350B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = KOAuthDemo;
-				LastUpgradeCheck = 0450;
-				ORGANIZATIONNAME = "";
+				LastUpgradeCheck = 0460;
 			};
-			buildConfigurationList = 21C4DFE816B10A7D002D99AF /* Build configuration list for PBXProject "KOAuth" */;
+			buildConfigurationList = 21B3DD3F16DF54DC0070350B /* Build configuration list for PBXProject "KOAuth" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 21C4DFE316B10A7D002D99AF;
-			productRefGroup = 21C4DFEF16B10A7D002D99AF /* Products */;
+			mainGroup = 21B3DD3B16DF54DC0070350B;
+			productRefGroup = 21B3DD4516DF54DC0070350B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				21C4E01416B10A7D002D99AF /* KOAuthTests */,
+				21B3DD4316DF54DC0070350B /* KOAuth */,
+				21B3DD5416DF54DC0070350B /* KOAuthTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		21C4E01216B10A7D002D99AF /* Resources */ = {
+		21B3DD5216DF54DC0070350B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21C4E02116B10A7D002D99AF /* InfoPlist.strings in Resources */,
+				21B3DD6316DF54DC0070350B /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		21C4E01316B10A7D002D99AF /* ShellScript */ = {
+		21B3DD5316DF54DC0070350B /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -167,21 +235,38 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		21C4E01016B10A7D002D99AF /* Sources */ = {
+		21B3DD4016DF54DC0070350B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21C4E02416B10A7D002D99AF /* KOAuthTests.m in Sources */,
+				21B3DD7116DF553A0070350B /* KOAuth.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21B3DD5016DF54DC0070350B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21B3DD6616DF54DC0070350B /* KOAuthTests.m in Sources */,
+				21B3DD7216DF553A0070350B /* KOAuth.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		21B3DD5C16DF54DC0070350B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 21B3DD4316DF54DC0070350B /* KOAuth */;
+			targetProxy = 21B3DD5B16DF54DC0070350B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
-		21C4E01F16B10A7D002D99AF /* InfoPlist.strings */ = {
+		21B3DD6116DF54DC0070350B /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				21C4E02016B10A7D002D99AF /* en */,
+				21B3DD6216DF54DC0070350B /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -189,16 +274,18 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		21C4E02516B10A7D002D99AF /* Debug */ = {
+		21B3DD6716DF54DC0070350B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -211,38 +298,62 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
-		21C4E02616B10A7D002D99AF /* Release */ = {
+		21B3DD6816DF54DC0070350B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		21C4E02B16B10A7D002D99AF /* Debug */ = {
+		21B3DD6A16DF54DC0070350B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/KOAuth.app/KOAuth";
+				DSTROOT = /tmp/KOAuth.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		21B3DD6B16DF54DC0070350B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/KOAuth.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		21B3DD6D16DF54DC0070350B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
@@ -251,15 +362,13 @@
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "KOAuthTests/KOAuthTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
-		21C4E02C16B10A7D002D99AF /* Release */ = {
+		21B3DD6E16DF54DC0070350B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/KOAuth.app/KOAuth";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
@@ -268,7 +377,6 @@
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "KOAuthTests/KOAuthTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
@@ -276,25 +384,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		21C4DFE816B10A7D002D99AF /* Build configuration list for PBXProject "KOAuth" */ = {
+		21B3DD3F16DF54DC0070350B /* Build configuration list for PBXProject "KOAuth" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				21C4E02516B10A7D002D99AF /* Debug */,
-				21C4E02616B10A7D002D99AF /* Release */,
+				21B3DD6716DF54DC0070350B /* Debug */,
+				21B3DD6816DF54DC0070350B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		21C4E02A16B10A7D002D99AF /* Build configuration list for PBXNativeTarget "KOAuthTests" */ = {
+		21B3DD6916DF54DC0070350B /* Build configuration list for PBXNativeTarget "KOAuth" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				21C4E02B16B10A7D002D99AF /* Debug */,
-				21C4E02C16B10A7D002D99AF /* Release */,
+				21B3DD6A16DF54DC0070350B /* Debug */,
+				21B3DD6B16DF54DC0070350B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		21B3DD6C16DF54DC0070350B /* Build configuration list for PBXNativeTarget "KOAuthTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21B3DD6D16DF54DC0070350B /* Debug */,
+				21B3DD6E16DF54DC0070350B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 21C4DFE516B10A7D002D99AF /* Project object */;
+	rootObject = 21B3DD3C16DF54DC0070350B /* Project object */;
 }
