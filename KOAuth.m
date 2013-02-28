@@ -17,7 +17,6 @@
 #define KOAUTH_BURST_LINK static __inline__ KOAUTH_ATTRIBUTES(always_inline)
 
 
-
 /*
  OAuth requires the UTC timestamp we send to be accurate. The user's device
  may not be, and often isn't. To work around this you should set this to the
@@ -26,30 +25,8 @@
 #define KOAUTH_UTC_TIME_OFFSET 0
 
 
-@interface KOAuth()
-
-#pragma mark - Generate Request
-- (NSMutableURLRequest *)getRequestWittURL:(NSURL *)url andMethod:(NSString *)method;
-- (NSMutableString *)getParametersString:(NSDictionary *)unencodedParameters;
-
-#pragma mark - Signature
-- (NSString *)signatureWithURL:(NSURL *)url andMethod:(NSString *)method;
-KOAUTH_BURST_LINK NSString *signatureBase(NSMutableDictionary *params, NSMutableDictionary *queryParams, NSString *method, NSURL *url);
-- (NSString *)getAuthorization:(NSDictionary *)params url:(NSURL *)url method:(NSString *)method;
-
-#pragma mark - Shared
-KOAUTH_BURST_LINK NSString *urlEncode(NSString *source);
-KOAUTH_BURST_LINK void chomp(NSMutableString *source);
-KOAUTH_BURST_LINK NSString *nonce();
-KOAUTH_BURST_LINK NSString *timestamp();
-// If your input string isn't 20 characters this won't work.
-KOAUTH_BURST_LINK NSString *base64(const uint8_t *input);
-
-@end
-
 
 @implementation KOAuth
-
 
 #pragma mark - Init
 - (id)initWithConsumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessToken:(NSString *)accessToken tokenSecret:(NSString *)tokenSecret
@@ -90,97 +67,6 @@ KOAUTH_BURST_LINK NSString *base64(const uint8_t *input);
     };
     _signature_secret = [NSString stringWithFormat:@"%@&%@", consumerSecret, tokenSecret ? : @""  ];
     return self;
-}
-
-
-#pragma mark - Signature
-- (NSString *)signatureWithURL:(NSURL *)url andMethod:(NSString *)method
-{
-    NSData *sigbase = [signatureBase([_params mutableCopy], [_queryParams mutableCopy], method, url) dataUsingEncoding:NSUTF8StringEncoding];
-    NSData *secret = [_signature_secret dataUsingEncoding:NSUTF8StringEncoding];
-	
-    uint8_t digest[20] = {0};
-    CCHmacContext cx;
-    CCHmacInit(&cx, kCCHmacAlgSHA1, secret.bytes, secret.length);
-    CCHmacUpdate(&cx, sigbase.bytes, sigbase.length);
-    CCHmacFinal(&cx, digest);
-    
-    return base64(digest);
-}
-KOAUTH_BURST_LINK NSString *signatureBase(NSMutableDictionary *params, NSMutableDictionary *queryParams, NSString *method, NSURL *url)
-{
-    NSMutableString *p3 = [NSMutableString stringWithCapacity:256];
-    [params addEntriesFromDictionary:queryParams];
-    
-    NSArray *keys = [[params allKeys] sortedArrayUsingSelector:@selector(compare:)];
-    for (NSString *key in keys) {
-        [p3 appendString:urlEncode(key)];
-        [p3 appendString:@"="];
-        [p3 appendString:[params objectForKey:key]];
-        [p3 appendString:@"&"];
-    }
-    
-    chomp(p3);
-    
-	NSString *result = [NSString stringWithFormat:@"%@&%@%%3A%%2F%%2F%@%%3A%@%@&%@",
-                  method,
-                  url.scheme.lowercaseString,
-                  urlEncode(url.host.lowercaseString),
-                  url.port,
-                  urlEncode(url.path),
-                  urlEncode(p3)];
-	return result;
-}
-#pragma mark Authorization
-- (NSString *)getAuthorization:(NSDictionary *)params url:(NSURL *)url method:(NSString *)method
-{
-    NSMutableString *header = [NSMutableString stringWithCapacity:512];
-    [header appendString:@"OAuth "];
-    for (NSString *key in params.allKeys) {
-        [header appendString:key];
-        [header appendString:@"=\""];
-        [header appendString:[params objectForKey:key]];
-        [header appendString:@"\", "];
-    }
-    [header appendString:@"oauth_signature=\""];
-    [header appendString:urlEncode([self signatureWithURL:url andMethod:method])];
-    [header appendString:@"\""];
-    return header;
-}
-
-
-#pragma mark - Generate Request
-- (NSMutableURLRequest *)getRequestWittURL:(NSURL *)url andMethod:(NSString *)method
-{
-    //TODO timeout interval depends on connectivity status
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [request setValue:[self getAuthorization:_params url:url method:method] forHTTPHeaderField:@"Authorization"];
-    [request setHTTPMethod:method];
-    return request;
-}
-
-#pragma mark add parameters and get encoded string
-- (NSMutableString *)getParametersString:(NSDictionary *)unencodedParameters
-{
-    if (!unencodedParameters.count)
-        return [NSMutableString string];
-	
-    NSMutableString *queryString = [NSMutableString string];
-    NSMutableDictionary *encodedParameters = [NSMutableDictionary dictionaryWithDictionary:_queryParams];
-    for (NSString *key in unencodedParameters.allKeys) {
-        NSString *enkey = urlEncode(key);
-        NSString *envalue = urlEncode([unencodedParameters objectForKey:key]);
-        [encodedParameters setObject:envalue forKey:enkey];
-        [queryString appendString:enkey];
-        [queryString appendString:@"="];
-        [queryString appendString:envalue];
-        [queryString appendString:@"&"];
-    }
-    chomp(queryString);
-	
-    _queryParams = encodedParameters;
-	
-    return queryString;
 }
 
 
@@ -250,7 +136,104 @@ KOAUTH_BURST_LINK NSString *signatureBase(NSMutableDictionary *params, NSMutable
 }
 
 
-#pragma mark - Shared
+#pragma mark - Private ←↖↑↗→↘↓↙←↖↑↗→↘↓↙←↖↑↗→↘↓↙←↖↑↗→↘↓↙←↖↑↗→↘↓↙←↖↑↗→↘↓↙
+#pragma mark - Generate Request
+- (NSMutableURLRequest *)getRequestWittURL:(NSURL *)url andMethod:(NSString *)method
+{
+    //TODO timeout interval depends on connectivity status
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:[self getAuthorization:_params url:url method:method] forHTTPHeaderField:@"Authorization"];
+    [request setHTTPMethod:method];
+    return request;
+}
+
+#pragma mark add parameters and get encoded string
+- (NSMutableString *)getParametersString:(NSDictionary *)unencodedParameters
+{
+    if (!unencodedParameters.count)
+        return [NSMutableString string];
+	
+    NSMutableString *queryString = [NSMutableString string];
+    NSMutableDictionary *encodedParameters = [NSMutableDictionary dictionaryWithDictionary:_queryParams];
+    for (NSString *key in unencodedParameters.allKeys) {
+        NSString *enkey = urlEncode(key);
+        NSString *envalue = urlEncode([unencodedParameters objectForKey:key]);
+        [encodedParameters setObject:envalue forKey:enkey];
+        [queryString appendString:enkey];
+        [queryString appendString:@"="];
+        [queryString appendString:envalue];
+        [queryString appendString:@"&"];
+    }
+    chomp(queryString);
+	
+    _queryParams = encodedParameters;
+	
+    return queryString;
+}
+
+
+#pragma mark - Signature
+- (NSString *)signatureWithURL:(NSURL *)url andMethod:(NSString *)method
+{
+    NSData *sigbase = [signatureBase([_params mutableCopy], [_queryParams mutableCopy], method, url) dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *secret = [_signature_secret dataUsingEncoding:NSUTF8StringEncoding];
+	
+    uint8_t digest[20] = {0};
+    CCHmacContext cx;
+    CCHmacInit(&cx, kCCHmacAlgSHA1, secret.bytes, secret.length);
+    CCHmacUpdate(&cx, sigbase.bytes, sigbase.length);
+    CCHmacFinal(&cx, digest);
+    
+    return base64(digest);
+}
+KOAUTH_BURST_LINK NSString *signatureBase(NSMutableDictionary *params, NSMutableDictionary *queryParams, NSString *method, NSURL *url)
+{
+    NSMutableString *p3 = [NSMutableString stringWithCapacity:256];
+    [params addEntriesFromDictionary:queryParams];
+    
+    NSArray *keys = [[params allKeys] sortedArrayUsingSelector:@selector(compare:)];
+    for (NSString *key in keys) {
+        [p3 appendString:urlEncode(key)];
+        [p3 appendString:@"="];
+        [p3 appendString:[params objectForKey:key]];
+        [p3 appendString:@"&"];
+    }
+    
+    chomp(p3);
+    
+	NSString *result = [NSString stringWithFormat:@"%@&%@%%3A%%2F%%2F%@%%3A%@%@&%@",
+                        method,
+                        url.scheme.lowercaseString,
+                        urlEncode(url.host.lowercaseString),
+                        url.port,
+                        urlEncode(url.path),
+                        urlEncode(p3)];
+	return result;
+}
+#pragma mark Authorization
+- (NSString *)getAuthorization:(NSDictionary *)params url:(NSURL *)url method:(NSString *)method
+{
+    NSMutableString *header = [NSMutableString stringWithCapacity:512];
+    [header appendString:@"OAuth "];
+    for (NSString *key in params.allKeys) {
+        [header appendString:key];
+        [header appendString:@"=\""];
+        [header appendString:[params objectForKey:key]];
+        [header appendString:@"\", "];
+    }
+    [header appendString:@"oauth_signature=\""];
+    [header appendString:urlEncode([self signatureWithURL:url andMethod:method])];
+    [header appendString:@"\""];
+    return header;
+}
+
+
+#pragma mark - Shared functions
+/**
+ UrlEncode (OAuth mode).
+ @param source: data source
+ @return: url encoded string
+ */
 KOAUTH_BURST_LINK NSString *urlEncode(NSString *source)
 {
     CFStringRef cfstring = CFURLCreateStringByAddingPercentEscapes(NULL, (__bridge CFStringRef) source, NULL, (CFStringRef) @"!*'();:@&=+$,/?%#[]", kCFStringEncodingUTF8);
@@ -258,12 +241,20 @@ KOAUTH_BURST_LINK NSString *urlEncode(NSString *source)
     CFRelease(cfstring);
     return result;
 }
-// remove the last char of source string
+
+/**
+ Remove the last char of source string.
+ */
 KOAUTH_BURST_LINK void chomp(NSMutableString *source)
 {
     if (source.length > 0)
         [source deleteCharactersInRange:NSMakeRange(source.length - 1, 1)];
 }
+
+/**
+ Genreate nonce.
+ @return: 5 chars nonce string
+ */
 KOAUTH_BURST_LINK NSString *nonce()
 {
     static const char map[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -279,6 +270,11 @@ KOAUTH_BURST_LINK NSString *nonce()
     
     return result;
 }
+
+/**
+ Generate time stamp.
+ @return: time stamp string
+ */
 KOAUTH_BURST_LINK NSString *timestamp()
 {
     time_t t;
@@ -286,6 +282,13 @@ KOAUTH_BURST_LINK NSString *timestamp()
     mktime(gmtime(&t));
     return [NSString stringWithFormat:@"%lu", t + KOAUTH_UTC_TIME_OFFSET];
 }
+
+/**
+ Convert array to base64 string.
+ If your input string isn't 20 characters this won't work.
+ @param input: [uint8_t]
+ @return: base64 string
+ */
 KOAUTH_BURST_LINK NSString *base64(const uint8_t *input)
 {
     static const char map[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
