@@ -20,10 +20,50 @@
 }
 
 // *all keys and values of parameters should be NSString*
-// get request with oauth
+/**
+ Generate a NSMutableURLRequest instance with oauth for HTTP GET.
+ @param url: http/https url
+ @param unencodedParameters: http get parameters
+ @param consumerKey
+ @param consumerSecret
+ @param accessToken
+ @param tokenSecret
+ @return: NSMutableURLRequest
+ */
 + (NSMutableURLRequest *)URLRequestForUrl:(NSURL *)url GETParameters:(NSDictionary *)unencodedParameters consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessToken:(NSString *)accessToken tokenSecret:(NSString *)tokenSecret;
-// post request with oauth
+/**
+ Generate a NSMutableURLRequest instance with oauth for HTTP POST.
+ @param url: http/https url
+ @param unencodedParameters: http get parameters
+ @param consumerKey
+ @param consumerSecret
+ @param accessToken
+ @param tokenSecret
+ @return: NSMutableURLRequest
+ */
 + (NSMutableURLRequest *)URLRequestForUrl:(NSURL *)url POSTParameters:(NSDictionary *)unencodedParameters consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessToken:(NSString *)accessToken tokenSecret:(NSString *)tokenSecret;
+/**
+ Generate a NSMutableURLRequest instance with oauth for HTTP PUT.
+ @param url: http/https url
+ @param unencodedParameters: http get parameters
+ @param consumerKey
+ @param consumerSecret
+ @param accessToken
+ @param tokenSecret
+ @return: NSMutableURLRequest
+ */
++ (NSMutableURLRequest *)URLRequestForUrl:(NSURL *)url PUTParameters:(NSDictionary *)unencodedParameters consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessToken:(NSString *)accessToken tokenSecret:(NSString *)tokenSecret;
+/**
+ Generate a NSMutableURLRequest instance with oauth for HTTP DELETE.
+ @param url: http/https url
+ @param unencodedParameters: http get parameters
+ @param consumerKey
+ @param consumerSecret
+ @param accessToken
+ @param tokenSecret
+ @return: NSMutableURLRequest
+ */
++ (NSMutableURLRequest *)URLRequestForUrl:(NSURL *)url DELETEParameters:(NSDictionary *)unencodedParameters consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessToken:(NSString *)accessToken tokenSecret:(NSString *)tokenSecret;
 
 // request for request_token
 + (NSMutableURLRequest *)URLRequestForRequestTokenWithUrl:(NSURL *)url consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret;

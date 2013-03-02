@@ -92,10 +92,10 @@
     NSURL *url = [NSURL URLWithString:@"http://term.ie/oauth/example/echo_api.php"];
     NSMutableURLRequest *request = [KOAuth URLRequestForUrl:url
                                               POSTParameters:@{@"name": @"Kelp", @"group": @"<A>" }
-                                                    consumerKey:@"key"
-                                                consumerSecret:@"secret"
-                                                    accessToken:@"accesskey"
-                                                    tokenSecret:@"accesssecret"];
+                                                consumerKey:@"key"
+                                             consumerSecret:@"secret"
+                                                accessToken:@"accesskey"
+                                                tokenSecret:@"accesssecret"];
     
     NSURLResponse *response = nil;
     NSError *error = nil;

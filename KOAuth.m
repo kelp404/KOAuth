@@ -108,6 +108,38 @@
 	
     return request;
 }
+#pragma mark HTTP PUT
++ (NSMutableURLRequest *)URLRequestForUrl:(NSURL *)url PUTParameters:(NSDictionary *)unencodedParameters consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessToken:(NSString *)accessToken tokenSecret:(NSString *)tokenSecret
+{
+    KOAuth *oauth = [[KOAuth alloc] initWithConsumerKey:consumerKey
+                                         consumerSecret:consumerSecret
+                                            accessToken:accessToken
+                                            tokenSecret:tokenSecret];
+    NSMutableURLRequest *request = [oauth getRequestWittURL:url
+                                                  andMethod:@"PUT"
+                                              andParameters:unencodedParameters];
+	
+    [request setHTTPBody:[oauth getUrlEncodedRequestBody]];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+	
+    return request;
+}
+#pragma mark HTTP DELETE
++ (NSMutableURLRequest *)URLRequestForUrl:(NSURL *)url DELETEParameters:(NSDictionary *)unencodedParameters consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessToken:(NSString *)accessToken tokenSecret:(NSString *)tokenSecret
+{
+    KOAuth *oauth = [[KOAuth alloc] initWithConsumerKey:consumerKey
+                                         consumerSecret:consumerSecret
+                                            accessToken:accessToken
+                                            tokenSecret:tokenSecret];
+    NSMutableURLRequest *request = [oauth getRequestWittURL:url
+                                                  andMethod:@"DELETE"
+                                              andParameters:unencodedParameters];
+	
+    [request setHTTPBody:[oauth getUrlEncodedRequestBody]];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+	
+    return request;
+}
 #pragma mark request for request_token
 + (NSMutableURLRequest *)URLRequestForRequestTokenWithUrl:(NSURL *)url consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret
 {
