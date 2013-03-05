@@ -317,12 +317,12 @@ KOAUTH_BURST_LINK NSString *signatureBase(NSDictionary *params, NSDictionary *qu
     [result appendFormat:@"%@&", method];
     [result appendString:url.scheme.lowercaseString];
     [result appendString:@"%3A%2F%2F"];  // @"://"
-    [result appendString:urlEncode(url.host.lowercaseString)];
+    [result appendString:urlEncode(url.host)];
     if (url.port) {
         [result appendFormat:@"%%3A%@", url.port];  // :80
     }
     if (url.path) {
-        [result appendString:urlEncode(url.path.lowercaseString)];
+        [result appendString:urlEncode(url.path)];
     }
     if (param.length > 0) {
         [result appendFormat:@"&%@", urlEncode(param)];
