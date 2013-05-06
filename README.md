@@ -8,11 +8,11 @@ Kelp http://kelp.phate.org/
 ##Example
 ```objective-c
 NSURL *url = [NSURL URLWithString:@"http://demo.uservoice.com/api/v1/articles.json"];
-NSMutableURLRequest *request = [KOAuth URLRequestForUrl:url
-                                          GETParameters:nil
-                                            consumerKey:@"pZJocTBPbg5FN4bAwczDLQ"
-                                         consumerSecret:@"Q7UKcxRYLlSJN4CxegUYI6t0uprdsSAGthRIDvYmI"
-                                            accessToken:nil tokenSecret:nil];
+NSMutableURLRequest *request = [KOAuth get:url
+                                parameters:nil
+                               consumerKey:@"pZJocTBPbg5FN4bAwczDLQ"
+                            consumerSecret:@"Q7UKcxRYLlSJN4CxegUYI6t0uprdsSAGthRIDvYmI"
+                               accessToken:nil tokenSecret:nil];
 NSLog(@"Headers:\n%@", request.allHTTPHeaderFields);
 
 NSURLResponse *response = nil;
