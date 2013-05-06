@@ -96,15 +96,30 @@
 + (NSMutableURLRequest *)post:(NSURL *)url parameters:(NSDictionary *)unencodedParameters consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessToken:(NSString *)accessToken tokenSecret:(NSString *)tokenSecret
 {
     KOAuth *oauth = [[KOAuth alloc] initWithConsumerKey:consumerKey
-                                           consumerSecret:consumerSecret
-                                              accessToken:accessToken
-                                              tokenSecret:tokenSecret];
+                                         consumerSecret:consumerSecret
+                                            accessToken:accessToken
+                                            tokenSecret:tokenSecret];
     NSMutableURLRequest *request = [oauth getRequestWittURL:url
                                                   andMethod:@"POST"
                                               andParameters:unencodedParameters];
 	
     [request setHTTPBody:[oauth getUrlEncodedRequestBody]];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+	
+    return request;
+}
++ (NSMutableURLRequest *)post:(NSURL *)url jsonParameters:(id)parameters consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessToken:(NSString *)accessToken tokenSecret:(NSString *)tokenSecret
+{
+    KOAuth *oauth = [[KOAuth alloc] initWithConsumerKey:consumerKey
+                                         consumerSecret:consumerSecret
+                                            accessToken:accessToken
+                                            tokenSecret:tokenSecret];
+    NSMutableURLRequest *request = [oauth getRequestWittURL:url
+                                                  andMethod:@"POST"
+                                              andParameters:parameters];
+	
+    [request setHTTPBody:[oauth getJSONRequestBody]];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
 	
     return request;
 }
@@ -124,6 +139,21 @@
 	
     return request;
 }
++ (NSMutableURLRequest *)put:(NSURL *)url jsonParameters:(id)parameters consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessToken:(NSString *)accessToken tokenSecret:(NSString *)tokenSecret
+{
+    KOAuth *oauth = [[KOAuth alloc] initWithConsumerKey:consumerKey
+                                         consumerSecret:consumerSecret
+                                            accessToken:accessToken
+                                            tokenSecret:tokenSecret];
+    NSMutableURLRequest *request = [oauth getRequestWittURL:url
+                                                  andMethod:@"PUT"
+                                              andParameters:parameters];
+	
+    [request setHTTPBody:[oauth getJSONRequestBody]];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+	
+    return request;
+}
 #pragma mark HTTP DELETE
 + (NSMutableURLRequest *)delete:(NSURL *)url parameters:(NSDictionary *)unencodedParameters consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessToken:(NSString *)accessToken tokenSecret:(NSString *)tokenSecret
 {
@@ -140,6 +170,21 @@
 	
     return request;
 }
++ (NSMutableURLRequest *)delete:(NSURL *)url jsonParameters:(id)parameters consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessToken:(NSString *)accessToken tokenSecret:(NSString *)tokenSecret
+{
+    KOAuth *oauth = [[KOAuth alloc] initWithConsumerKey:consumerKey
+                                         consumerSecret:consumerSecret
+                                            accessToken:accessToken
+                                            tokenSecret:tokenSecret];
+    NSMutableURLRequest *request = [oauth getRequestWittURL:url
+                                                  andMethod:@"DELETE"
+                                              andParameters:parameters];
+	
+    [request setHTTPBody:[oauth getJSONRequestBody]];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+	
+    return request;
+}
 #pragma mark request for request_token
 + (NSMutableURLRequest *)requestTokenWithUrl:(NSURL *)url consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret
 {
@@ -152,7 +197,7 @@
 + (NSMutableURLRequest *)accessTokenWithUrl:(NSURL *)url consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret requestToken:(NSString *)requestToken tokenSecret:(NSString *)tokenSecret oauthVerfier:(NSString *)oauthVerfier
 {
     KOAuth *oauth = [[KOAuth alloc] initForAccessTokenWithConsumerKey:consumerKey
-                                                      consumerSecret:consumerSecret
+                                                       consumerSecret:consumerSecret
                                                          requestToken:requestToken
                                                           tokenSecret:tokenSecret
                                                          oauthVerfier:oauthVerfier];
@@ -184,12 +229,14 @@
  @param parameters: query string or form data
  @return: NSMutableURLRequest
  */
-- (NSMutableURLRequest *)getRequestWittURL:(NSURL *)url andMethod:(NSString *)method andParameters:(NSDictionary *)parameters
+- (NSMutableURLRequest *)getRequestWittURL:(NSURL *)url andMethod:(NSString *)method andParameters:(id)parameters
 {
-    if (parameters)
+    _sourceParameters = parameters;
+    if (parameters && [parameters isKindOfClass:[NSDictionary class]]) {
         _encodedFormParameters = encodeDictionary(parameters);
-
-    if ([method isEqualToString:@"GET"] && _encodedFormParameters) {
+    }
+    
+    if ([method isEqualToString:@"GET"] && _encodedFormParameters.count > 0) {
         NSString *queryString = getParametersString(_encodedFormParameters);
         if (queryString.length > 0) {
             url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", url.absoluteString, queryString]];
@@ -199,6 +246,7 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:getAuthorization(url, method, _signatureSecret, _params, _encodedFormParameters) forHTTPHeaderField:@"Authorization"];
     [request setHTTPMethod:method];
+    
     return request;
 }
 /**
@@ -208,6 +256,14 @@
 - (NSData *)getUrlEncodedRequestBody
 {
     return [getParametersString(_encodedFormParameters) dataUsingEncoding:NSUTF8StringEncoding];
+}
+/**
+ Get json form body.
+ @return: NSData
+ */
+- (NSData *)getJSONRequestBody
+{
+    return [getJSON(_sourceParameters) dataUsingEncoding:NSUTF8StringEncoding];
 }
 
 #pragma mark url encode dictionary
@@ -239,6 +295,38 @@ KOAUTH_BURST_LINK NSMutableString * getParametersString(NSDictionary *encodedPar
     chomp(queryString);
     
     return queryString;
+}
+/**
+ Convert NSDictionary to json.
+ */
+KOAUTH_BURST_LINK NSMutableString * getJSON(id parameters)
+{
+    NSMutableString *json = [NSMutableString new];
+    
+    if ([parameters isKindOfClass:[NSDictionary class]]) {
+        // NSDictionary
+        [json appendString:@"{"];
+        for (NSString *key in [(NSDictionary *)parameters allKeys]) {
+            [json appendFormat:@"\"%@\":\"%@\",", key, [parameters objectForKey:key]];
+        }
+        if (json.length > 1)
+            [json deleteCharactersInRange:NSMakeRange(json.length - 1, 1)];
+        [json appendString:@"}"];
+    }
+    else {  // NSArray
+        [json appendString:@"["];
+        for (id item in (NSArray *)parameters) {
+            if ([item isKindOfClass:[NSString class]])
+                [json appendFormat:@"\"%@\",", item];
+            else if ([item isKindOfClass:[NSNumber class]])
+                [json appendFormat:@"%@,", item];
+        }
+        if (json.length > 1)
+            [json deleteCharactersInRange:NSMakeRange(json.length - 1, 1)];
+        [json appendString:@"]"];
+    }
+    
+    return json;
 }
 
 
@@ -278,13 +366,13 @@ KOAUTH_BURST_LINK NSString * getAuthorization(NSURL *url, NSString *method, NSSt
  */
 KOAUTH_BURST_LINK NSString *signatureWithURL(NSURL *url, NSString *method, NSString *signatureSecret, NSDictionary *params, NSDictionary *encodedQueryParameters)
 {
-    NSData *sigbase = [signatureBase(params, encodedQueryParameters, method, url) dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *signbase = [signatureBase(params, encodedQueryParameters, method, url) dataUsingEncoding:NSUTF8StringEncoding];
     NSData *secret = [signatureSecret dataUsingEncoding:NSUTF8StringEncoding];
 	
     uint8_t digest[20] = {0};
     CCHmacContext cx;
     CCHmacInit(&cx, kCCHmacAlgSHA1, secret.bytes, secret.length);
-    CCHmacUpdate(&cx, sigbase.bytes, sigbase.length);
+    CCHmacUpdate(&cx, signbase.bytes, signbase.length);
     CCHmacFinal(&cx, digest);
     
     return base64(digest);
