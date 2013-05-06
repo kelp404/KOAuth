@@ -81,7 +81,7 @@
 
 #pragma mark - KOAuth alloc URLRequest
 #pragma mark HTTP GET
-+ (NSMutableURLRequest *)URLRequestForUrl:(NSURL *)url GETParameters:(NSDictionary *)unencodedParameters consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessToken:(NSString *)accessToken tokenSecret:(NSString *)tokenSecret
++ (NSMutableURLRequest *)get:(NSURL *)url parameters:(NSDictionary *)unencodedParameters consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessToken:(NSString *)accessToken tokenSecret:(NSString *)tokenSecret
 {
     KOAuth *oauth = [[KOAuth alloc] initWithConsumerKey:consumerKey
                                          consumerSecret:consumerSecret
@@ -93,7 +93,7 @@
     return request;
 }
 #pragma mark HTTP POST
-+ (NSMutableURLRequest *)URLRequestForUrl:(NSURL *)url POSTParameters:(NSDictionary *)unencodedParameters consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessToken:(NSString *)accessToken tokenSecret:(NSString *)tokenSecret
++ (NSMutableURLRequest *)post:(NSURL *)url parameters:(NSDictionary *)unencodedParameters consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessToken:(NSString *)accessToken tokenSecret:(NSString *)tokenSecret
 {
     KOAuth *oauth = [[KOAuth alloc] initWithConsumerKey:consumerKey
                                            consumerSecret:consumerSecret
@@ -109,7 +109,7 @@
     return request;
 }
 #pragma mark HTTP PUT
-+ (NSMutableURLRequest *)URLRequestForUrl:(NSURL *)url PUTParameters:(NSDictionary *)unencodedParameters consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessToken:(NSString *)accessToken tokenSecret:(NSString *)tokenSecret
++ (NSMutableURLRequest *)put:(NSURL *)url parameters:(NSDictionary *)unencodedParameters consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessToken:(NSString *)accessToken tokenSecret:(NSString *)tokenSecret
 {
     KOAuth *oauth = [[KOAuth alloc] initWithConsumerKey:consumerKey
                                          consumerSecret:consumerSecret
@@ -125,7 +125,7 @@
     return request;
 }
 #pragma mark HTTP DELETE
-+ (NSMutableURLRequest *)URLRequestForUrl:(NSURL *)url DELETEParameters:(NSDictionary *)unencodedParameters consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessToken:(NSString *)accessToken tokenSecret:(NSString *)tokenSecret
++ (NSMutableURLRequest *)delete:(NSURL *)url parameters:(NSDictionary *)unencodedParameters consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessToken:(NSString *)accessToken tokenSecret:(NSString *)tokenSecret
 {
     KOAuth *oauth = [[KOAuth alloc] initWithConsumerKey:consumerKey
                                          consumerSecret:consumerSecret
@@ -141,7 +141,7 @@
     return request;
 }
 #pragma mark request for request_token
-+ (NSMutableURLRequest *)URLRequestForRequestTokenWithUrl:(NSURL *)url consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret
++ (NSMutableURLRequest *)requestTokenWithUrl:(NSURL *)url consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret
 {
     KOAuth *oauth = [[KOAuth alloc] initForRequestTokenWithConsumerKey:consumerKey consumerSecret:consumerSecret];
     
@@ -149,7 +149,7 @@
     return rq;
 }
 #pragma mark request for access_token
-+ (NSMutableURLRequest *)URLRequestForAccessTokenWithUrl:(NSURL *)url consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret requestToken:(NSString *)requestToken tokenSecret:(NSString *)tokenSecret oauthVerfier:(NSString *)oauthVerfier
++ (NSMutableURLRequest *)accessTokenWithUrl:(NSURL *)url consumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret requestToken:(NSString *)requestToken tokenSecret:(NSString *)tokenSecret oauthVerfier:(NSString *)oauthVerfier
 {
     KOAuth *oauth = [[KOAuth alloc] initForAccessTokenWithConsumerKey:consumerKey
                                                       consumerSecret:consumerSecret

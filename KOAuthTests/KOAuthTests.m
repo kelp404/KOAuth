@@ -28,8 +28,8 @@
 - (void)testGetRequestToken
 {
     NSURL *url = [NSURL URLWithString:@"http://term.ie/oauth/example/request_token.php"];
-    NSMutableURLRequest *request = [KOAuth URLRequestForRequestTokenWithUrl:url
-                                                                consumerKey:@"key" consumerSecret:@"secret"];
+    NSMutableURLRequest *request = [KOAuth requestTokenWithUrl:url
+                                                   consumerKey:@"key" consumerSecret:@"secret"];
     
     NSURLResponse *response = nil;
     NSError *error = nil;
@@ -46,12 +46,12 @@
 - (void)testGetAccessToken
 {
     NSURL *url = [NSURL URLWithString:@"http://term.ie/oauth/example/access_token.php"];
-    NSMutableURLRequest *request = [KOAuth URLRequestForAccessTokenWithUrl:url
-                                                               consumerKey:@"key"
-                                                            consumerSecret:@"secret"
-                                                              requestToken:@"requestkey"
-                                                               tokenSecret:@"requestsecret"
-                                                              oauthVerfier:@""];
+    NSMutableURLRequest *request = [KOAuth accessTokenWithUrl:url
+                                                  consumerKey:@"key"
+                                               consumerSecret:@"secret"
+                                                 requestToken:@"requestkey"
+                                                  tokenSecret:@"requestsecret"
+                                                 oauthVerfier:@""];
     
     NSURLResponse *response = nil;
     NSError *error = nil;
@@ -68,12 +68,12 @@
 - (void)testHTTPGet
 {
     NSURL *url = [NSURL URLWithString:@"http://term.ie/oauth/example/echo_api.php"];
-    NSMutableURLRequest *request = [KOAuth URLRequestForUrl:url
-                                              GETParameters:@{@"name": @"kelp"}
-                                                consumerKey:@"key"
-                                             consumerSecret:@"secret"
-                                                accessToken:@"accesskey"
-                                                tokenSecret:@"accesssecret"];
+    NSMutableURLRequest *request = [KOAuth get:url
+                                    parameters:@{@"name": @"kelp"}
+                                   consumerKey:@"key"
+                                consumerSecret:@"secret"
+                                   accessToken:@"accesskey"
+                                   tokenSecret:@"accesssecret"];
     
     NSURLResponse *response = nil;
     NSError *error = nil;
@@ -90,12 +90,12 @@
 - (void)testHTTPPost
 {
     NSURL *url = [NSURL URLWithString:@"http://term.ie/oauth/example/echo_api.php"];
-    NSMutableURLRequest *request = [KOAuth URLRequestForUrl:url
-                                              POSTParameters:@{@"name": @"Kelp", @"group": @"<A>" }
-                                                consumerKey:@"key"
-                                             consumerSecret:@"secret"
-                                                accessToken:@"accesskey"
-                                                tokenSecret:@"accesssecret"];
+    NSMutableURLRequest *request = [KOAuth post:url
+                                      parameters:@{@"name": @"Kelp", @"group": @"<A>" }
+                                    consumerKey:@"key"
+                                 consumerSecret:@"secret"
+                                    accessToken:@"accesskey"
+                                    tokenSecret:@"accesssecret"];
     
     NSURLResponse *response = nil;
     NSError *error = nil;
