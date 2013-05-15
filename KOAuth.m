@@ -275,7 +275,11 @@ KOAUTH_BURST_LINK NSDictionary *encodeDictionary(NSDictionary *source)
     NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:source.count];
     
     for (NSString *key in source.allKeys) {
-        [result setObject:urlEncode([source objectForKey:key]) forKey:urlEncode(key)];
+        NSObject *value = [source objectForKey:key];
+        if ([value isKindOfClass:[NSString class]])
+            [result setObject:urlEncode((NSString *)value) forKey:key];
+        else if ([value isKindOfClass:[NSNumber class]])
+            [result setObject:[(NSNumber *)value stringValue] forKey:key];
     }
     return result;
 }
@@ -307,7 +311,11 @@ KOAUTH_BURST_LINK NSMutableString * getJSON(id parameters)
         // NSDictionary
         [json appendString:@"{"];
         for (NSString *key in [(NSDictionary *)parameters allKeys]) {
-            [json appendFormat:@"\"%@\":\"%@\",", key, [parameters objectForKey:key]];
+            id value = [parameters objectForKey:key];
+            if ([value isKindOfClass:[NSString class]])
+                [json appendFormat:@"\"%@\":\"%@\",", key, [parameters objectForKey:key]];
+            else if ([value isKindOfClass:[NSNumber class]])
+                [json appendFormat:@"\"%@\":%@,", key, [parameters objectForKey:key]];
         }
         if (json.length > 1)
             [json deleteCharactersInRange:NSMakeRange(json.length - 1, 1)];

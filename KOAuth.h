@@ -21,7 +21,8 @@
     id _sourceParameters;
 }
 
-// *all keys and values of parameters should be NSString*
+// *all keys of parameters should be NSString*
+// *all values of parameters should be NSString or NSNumber*
 /**
  Generate a NSMutableURLRequest instance with oauth for HTTP GET.
  @param url: http/https url
